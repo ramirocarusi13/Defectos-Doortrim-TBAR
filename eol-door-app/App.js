@@ -29,6 +29,10 @@ import PantallaRetrabajoDoor from "./src/PantallaRetrabajoDoor";
 import ErrorPantalla from "./src/components/ErrorPantalla";
 import { getSesionGuardada, guardarSesion, borrarSesion } from "./src/sesion";
 
+// Usuario del puesto de Calidad cuando la tablet no tiene login (el nombre real de
+// quien carga viene de tblDoorMain.usuario).
+const USUARIO_PUESTO = { id: null, name: "CALIDAD DOORTRIM", departamento: "CALIDAD" };
+
 export default function App() {
   const [user, setUser] = useState(null);
   const [codigo, setCodigo] = useState("");
@@ -50,16 +54,17 @@ export default function App() {
   const codigoRef = useRef(null);
   const scanTimer = useRef(null);
 
-  // Splash de arranque: logo TBAR + loading durante 2 segundos. Mientras tanto
-  // se recupera la sesion guardada (si se volvio desde la otra app, no se pide
-  // de nuevo el codigo).
+  // Sin login: la tablet arranca en la pantalla de Calidad del puesto. Quien carga
+  // el defecto sale de tblDoorMain.usuario. Produccion (retrabajo) entra con su
+  // codigo desde "Producción ›".
+  const [conLogin, setConLogin] = useState(false);
+
+  // Splash de arranque: logo TBAR + loading durante 2 segundos.
   useEffect(() => {
     const t = setTimeout(() => setSplash(false), 2000);
-    cargarServidorGuardado().then((v) => setServidorTxt(v || ""));
-    getSesionGuardada().then((u) => {
-      if (!u) return;
-      setUser(u);
-      setModo("RETRABAJO");
+    borrarSesion();
+    cargarServidorGuardado().then((v) => {
+      setServidorTxt(v || "");
       getFactoryConfig().then((c) => {
         if (c?.data) setConfig(c.data);
       });
@@ -127,6 +132,7 @@ export default function App() {
     setUser(null);
     setCodigo("");
     setError(null);
+    setConLogin(false); // vuelve a la pantalla de Calidad sin login
   };
 
   const onCodigoChange = (text) => {
@@ -139,6 +145,27 @@ export default function App() {
   };
 
   // ---------- LOGIN ----------
+  // ---------- CALIDAD SIN LOGIN (pantalla por defecto del puesto) ----------
+  if (!user && !conLogin) {
+    return (
+      <SafeAreaView style={[styles.screen, { flex: 1, paddingTop: TOP_ANDROID }]}>
+        <View style={{ flex: 1 }}>
+          <ErrorPantalla>
+            <PantallaDoorTrim
+              user={USUARIO_PUESTO}
+              config={config}
+              onLogout={() => {
+                setError(null);
+                setConLogin(true);
+              }}
+              textoLogout="Producción ›"
+            />
+          </ErrorPantalla>
+        </View>
+      </SafeAreaView>
+    );
+  }
+
   if (!user) {
     return (
       <SafeAreaView style={[styles.screen, { paddingTop: TOP_ANDROID }]}>
@@ -217,6 +244,9 @@ export default function App() {
             {loading ? <ActivityIndicator color="#000" /> : <Text style={styles.bigButtonText}>ENTRAR</Text>}
           </TouchableOpacity>
           {error ? <Text style={[styles.hint, { color: colors.red }]}>{error}</Text> : null}
+          <TouchableOpacity onPress={() => setConLogin(false)} focusable={false} style={{ alignSelf: "center", padding: 14 }}>
+            <Text style={{ color: colors.orange, fontWeight: "bold", fontSize: 16 }}>‹ VOLVER A CALIDAD</Text>
+          </TouchableOpacity>
         </KeyboardAvoidingView>
 
         {/* Cambiar de Wi-Fi: MANTENER APRETADO 3s el engranaje (el tap corto no hace

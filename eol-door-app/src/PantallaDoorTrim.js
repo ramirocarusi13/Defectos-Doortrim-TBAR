@@ -44,7 +44,7 @@ const STEP_MARCAR = "MARCAR";
 
 const PALETTE = ["F59E0B", "EF4444", "22C55E", "2563EB", "A855F7", "EC4899", "14B8A6", "F97316"];
 
-export default function PantallaDoorTrim({ user, config: configProp, onLogout }) {
+export default function PantallaDoorTrim({ user, config: configProp, onLogout, textoLogout }) {
   const [config, setConfig] = useState(configProp || null);
   const [step, setStep] = useState(STEP_SET);
   const [qr, setQr] = useState("");
@@ -317,7 +317,11 @@ export default function PantallaDoorTrim({ user, config: configProp, onLogout })
   resetRef.current = reset;
   const estadoRef = useRef({ step, marcas: 0 });
   estadoRef.current = { step, marcas: circles.length };
-  const yaAbiertos = useRef({}); // tipo -> ultimo QR abierto
+  // tblDoorMain (id, QR, fecha, usuario): se toma SIEMPRE la ultima fila. Cuando
+  // entra una fila nueva (otro id) se abre esa pieza. El usuario de la fila es quien
+  // carga el defecto (la tablet no tiene login).
+  const ultimoIdAbierto = useRef(null);
+  const [usuarioPieza, setUsuarioPieza] = useState(null);
   const [controlActivo, setControlActivo] = useState(false);
   const [piezaNueva, setPiezaNueva] = useState(null);
   useEffect(() => {
@@ -329,18 +333,18 @@ export default function PantallaDoorTrim({ user, config: configProp, onLogout })
     const revisar = async () => {
       const r = await getControlFinal();
       if (!vivo) return;
-      const filas = !r?.error && Array.isArray(r?.data) ? r.data : null;
-      setControlActivo(!!filas);
-      const nueva = (filas || []).find((f) => f.qr && yaAbiertos.current[f.tipo] !== f.qr);
-      if (!nueva) return;
+      setControlActivo(!r?.error);
+      const fila = !r?.error ? r?.data : null;
+      if (!fila?.qr || ultimoIdAbierto.current === fila.id) return;
       const { step: paso, marcas } = estadoRef.current;
       if (paso !== STEP_SET && marcas > 0) {
-        setPiezaNueva(nueva.qr); // se abre cuando termine con esta
+        setPiezaNueva(fila.qr); // se abre cuando termine con esta
         return;
       }
-      yaAbiertos.current[nueva.tipo] = nueva.qr;
+      ultimoIdAbierto.current = fila.id;
       if (paso !== STEP_SET) resetRef.current?.();
-      buscarSetRef.current?.(nueva.qr);
+      setUsuarioPieza(fila.usuario || null);
+      buscarSetRef.current?.(fila.qr);
     };
     revisar();
     const t = setInterval(revisar, 2000);
@@ -409,6 +413,7 @@ export default function PantallaDoorTrim({ user, config: configProp, onLogout })
       secuencia: setInfo?.secuencia != null ? String(setInfo.secuencia) : undefined,
       linea: setInfo?.linea || (typeof user?.linea === "string" ? user.linea : user?.linea?.codigo),
       user: user?.id,
+      usuario_nombre: usuarioPieza || undefined,
       puesto_nombre: "DOORTRIM",
     });
     setGuardando(false);
@@ -557,7 +562,7 @@ export default function PantallaDoorTrim({ user, config: configProp, onLogout })
           <View style={{ width: Math.min(320, Math.round(ventana.width * 0.3)) }}>
             <View style={[styles.topbar, { marginBottom: 6 }]}>
               <Text style={[styles.userTag, { flexShrink: 1 }]} numberOfLines={1}>
-                {user?.name || user?.email || "Calidad"}
+                {usuarioPieza ? `Cargó: ${usuarioPieza}` : user?.name || user?.email || "Calidad"}
               </Text>
               <TouchableOpacity onPress={pedirCancelar} focusable={false} hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}>
                 <Text style={[styles.userTag, { color: colors.red, fontWeight: "bold" }]}>✕ CANCELAR</Text>
@@ -584,14 +589,14 @@ export default function PantallaDoorTrim({ user, config: configProp, onLogout })
 
       <View style={[styles.body, compacto && { padding: 8 }]}>
         <View style={[styles.topbar, compacto && { marginBottom: 4 }]}>
-          <Text style={styles.userTag}>{user?.name || user?.email || "Calidad"}</Text>
+          <Text style={styles.userTag}>{usuarioPieza ? `Cargó: ${usuarioPieza}` : user?.name || user?.email || "Calidad"}</Text>
           {compacto ? (
             <TouchableOpacity onPress={pedirCancelar} focusable={false} hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}>
               <Text style={[styles.userTag, { color: colors.red, fontWeight: "bold" }]}>✕ CANCELAR</Text>
             </TouchableOpacity>
           ) : null}
           <TouchableOpacity onPress={onLogout} focusable={false}>
-            <Text style={[styles.userTag, { color: colors.orange }]}>Cambiar usuario</Text>
+            <Text style={[styles.userTag, { color: colors.orange }]}>{textoLogout || "Cambiar usuario"}</Text>
           </TouchableOpacity>
         </View>
 
@@ -606,6 +611,9 @@ export default function PantallaDoorTrim({ user, config: configProp, onLogout })
               placeholder="Escaneá el QR"
               placeholderTextColor="#9ca3af"
               autoFocus
+              // El lector de QR escribe igual; sin teclado en pantalla (en horizontal
+              // tapaba media pantalla).
+              showSoftInputOnFocus={false}
               blurOnSubmit={false}
               onSubmitEditing={(e) => procesarScan(e.nativeEvent.text)}
               returnKeyType="search"
@@ -690,9 +698,7 @@ export default function PantallaDoorTrim({ user, config: configProp, onLogout })
 
           {step === STEP_SET && !loading && !error ? (
             <Text style={styles.emptyText}>
-              {controlActivo
-                ? "ESPERANDO PIEZA DEL CONTROL FINAL…\n(se abre sola, o escaneá el QR)"
-                : "CUANDO HAY UN DEFECTO, ESCANEÁ EL DOOR TRIM"}
+              ESPERANDO ESCANEO
             </Text>
           ) : null}
         </ScrollView>

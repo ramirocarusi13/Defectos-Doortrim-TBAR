@@ -525,6 +525,8 @@ class EolDoorController extends Controller
             'circles'       => 'required|array|min:1',
             'circles.*'     => 'array',
             'user'          => 'nullable',
+            // Sin login en la tablet: quien carga sale de tblDoorMain.usuario.
+            'usuario_nombre' => 'nullable|string|max:120',
             'puesto_id'     => 'nullable|string|max:60',
             'puesto_nombre' => 'nullable|string|max:120',
             'modelo'        => 'nullable|string|max:150',
@@ -685,28 +687,29 @@ class EolDoorController extends Controller
     }
 
     /**
-     * QR que dejo el control final en [TB-PLC].[dbo].[tblDoorControlFinal] (una fila
-     * por TIPO). La tablet de Calidad lo consulta cada 2 s y abre sola la pieza
-     * cuando aparece un QR nuevo. Solo lectura.
+     * Ultimo QR que cargo el puesto en [TB-PLC].[dbo].[tblDoorMain] (id, QR, fecha,
+     * usuario). La tablet de Calidad lo consulta cada 2 s: muestra esa pieza y pasa
+     * sola a la siguiente cuando entra una fila nueva. Solo lectura.
+     * data: { id, qr, fecha, usuario } o null si la tabla esta vacia.
      */
     public function controlFinal(): JsonResponse
     {
         $tabla = (string) config('door.control_final_tabla');
         if (!preg_match('/^[\[\]\w.\- ]+$/', $tabla)) {
-            return response()->json(['data' => [], 'error' => true, 'message' => 'Tabla de control final mal configurada'], 500);
+            return response()->json(['data' => null, 'error' => true, 'message' => 'Tabla del puesto mal configurada'], 500);
         }
         try {
-            $filas = DB::connection('tbl')->select("SELECT TIPO, QR, RH, LH FROM {$tabla} WITH (NOLOCK)");
+            $f = DB::connection('tbl')->selectOne("SELECT TOP 1 id, QR, fecha, usuario FROM {$tabla} WITH (NOLOCK) ORDER BY id DESC");
         } catch (\Throwable $e) {
             Log::warning('controlFinal: no se pudo leer', ['error' => $e->getMessage()]);
-            return response()->json(['data' => [], 'error' => true, 'message' => 'No se pudo leer el control final'], 503);
+            return response()->json(['data' => null, 'error' => true, 'message' => 'No se pudo leer la tabla del puesto'], 503);
         }
-        $data = array_map(fn ($f) => [
-            'tipo' => DoorService::normalizarTipo((string) $f->TIPO),
-            'qr'   => trim((string) ($f->QR ?? '')) ?: null,
-            'rh'   => (string) ($f->RH ?? ''),
-            'lh'   => (string) ($f->LH ?? ''),
-        ], $filas);
+        $data = $f ? [
+            'id'      => (string) $f->id,
+            'qr'      => trim((string) ($f->QR ?? '')) ?: null,
+            'fecha'   => $f->fecha,
+            'usuario' => trim((string) ($f->usuario ?? '')) ?: null,
+        ] : null;
         return response()->json(['data' => $data, 'error' => false]);
     }
 

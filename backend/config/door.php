@@ -14,5 +14,5 @@ return [
     // Control final: el sistema del puesto deja el QR de la pieza en esta tabla
     // (una fila por TIPO: Panel / Armrest / Garnish) y la tablet de Calidad la abre
     // sola. Se lee por la conexion 'tbl' (mismo server .153, solo lectura).
-    'control_final_tabla' => env('DOOR_CONTROL_FINAL_TABLA', '[TB-PLC].[dbo].[tblDoorControlFinal]'),
+    'control_final_tabla' => env('DOOR_CONTROL_FINAL_TABLA', '[TB-PLC].[dbo].[tblDoorMain]'),
 ];

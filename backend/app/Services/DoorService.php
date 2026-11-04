@@ -588,7 +588,8 @@ class DoorService
                 'vista_nombre'       => $c['viewName'] ?? null,
                 'estado'             => 'PENDIENTE',
                 'marcado_por'        => $user?->id,
-                'marcado_por_nombre' => $user?->name,
+                // Sin login: el nombre que dejo el puesto en tblDoorMain.usuario.
+                'marcado_por_nombre' => $user?->name ?? ($payload['usuario_nombre'] ?? null),
                 'turno'              => $user?->turno,
                 'marcado_at'         => now(),
                 'puesto_id'          => $payload['puesto_id'] ?? null,

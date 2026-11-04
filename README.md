@@ -24,7 +24,9 @@ encuentran solas en su red (o por USB). Configurar `backend/.env` a partir de `b
 (EOL_TBAR, y TB-L con `DB_HOST_TBL`, `DB_DATABASE_TBL`, `DB_USERNAME_TBL`, `DB_PASSWORD_TBL`).
 
 ## Servidor
-Ver `PASO-A-PASO-DOOR-SERVIDOR.md` (Docker, puerto 9001, igual que asientos).
+- **IIS en el .150 (el que va):** `deploy-iis/PASO-A-PASO-IIS.md` + `deploy-iis/INSTALAR-IIS.ps1`
+  (sitio aparte en el puerto 9001; `.env` de ejemplo en `deploy-iis/env.servidor`).
+- Docker (alternativa): `PASO-A-PASO-DOOR-SERVIDOR.md`.
 
 ## Fotos de los modelos
 `php backend/importar-fotos-doortrim.php "<carpeta 737D - Fotos DOOR AR GN>"`: carga las fotos por SD,

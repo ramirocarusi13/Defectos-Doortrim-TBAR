@@ -103,8 +103,27 @@ catch (Throwable $e) { $mal++; echo "   ERROR TB-L/TB-PLC: " . substr($e->getMes
 exit($mal ? 1 : 0);
 '@ | Set-Content -Path (Join-Path $backend "probar-db.tmp.php") -Encoding ASCII
 Push-Location $backend
-& $php "probar-db.tmp.php"
+$salida = & $php "probar-db.tmp.php"
 $dbOk = $LASTEXITCODE -eq 0
+$salida | ForEach-Object { Write-Host $_ }
+# Login de EOL_TBAR inexistente: se puede crear aca con el usuario de Windows
+# (admin del SQL) corriendo crear-login-eol_app.sql del paquete.
+$sqlLogin = Join-Path $Paquete "crear-login-eol_app.sql"
+if (-not $dbOk -and ($salida -join "`n") -match "Login failed for user 'eol_app'" -and (Test-Path $sqlLogin)) {
+    $sqlcmd = Get-Command sqlcmd -ErrorAction SilentlyContinue
+    if (-not $sqlcmd) {
+        Ojo "No hay sqlcmd: abri $sqlLogin en SSMS (conectado al .150) y ejecutalo con F5."
+    } else {
+        $r = Read-Host "   El usuario eol_app no existe en el SQL del .150. Crearlo ahora con tu usuario de Windows? (S/N)"
+        if ($r -match "^[sS]") {
+            & sqlcmd -S "172.17.132.150" -E -C -b -i $sqlLogin
+            if ($LASTEXITCODE -ne 0) { & sqlcmd -S "172.17.132.150" -E -b -i $sqlLogin }
+            $salida = & $php "probar-db.tmp.php"
+            $dbOk = $LASTEXITCODE -eq 0
+            $salida | ForEach-Object { Write-Host $_ }
+        }
+    }
+}
 Pop-Location
 Remove-Item (Join-Path $backend "probar-db.tmp.php") -Force
 if (-not $dbOk) { Falla "No conecta a alguna base. Revisa usuario/clave en $envFile (notepad) y volve a correr esto." }

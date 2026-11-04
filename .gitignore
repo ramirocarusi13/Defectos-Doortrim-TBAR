@@ -1,0 +1,22 @@
+# Credenciales: nunca al repo (se arman desde los .env.example)
+.env
+backend/.env
+backend/.env.backup
+backend/storage/*.key
+
+# Dependencias y compilados
+node_modules/
+backend/vendor/
+*.apk
+eol-door-app/.expo/
+eol-door-app/android/build/
+eol-door-app/android/app/build/
+eol-door-app/android/.gradle/
+eol-door-app/android/local.properties
+
+# Datos que no van al repo
+backend/public/uploads/
+backend/storage/logs/
+backend/storage/app/
+tbl-tablas.txt
+*.log

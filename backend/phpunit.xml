@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="./vendor/phpunit/phpunit/phpunit.xsd"
+         bootstrap="vendor/autoload.php"
+         colors="true"
+>
+    <testsuites>
+        <testsuite name="Unit">
+            <directory>tests/Unit</directory>
+        </testsuite>
+        <testsuite name="Feature">
+            <directory>tests/Feature</directory>
+        </testsuite>
+    </testsuites>
+    <source>
+        <include>
+            <directory>app</directory>
+        </include>
+    </source>
+    <php>
+        <env name="APP_ENV" value="testing"/>
+        <env name="BCRYPT_ROUNDS" value="4"/>
+        <env name="CACHE_DRIVER" value="array"/>
+        <env name="DB_CONNECTION" value="sqlite" force="true"/>
+        <env name="DB_DATABASE" value=":memory:" force="true"/>
+        <!-- Las conexiones SQL Server con nombre (sqlsrv, sqlsrv_users, sqlsrvsar) leen
+             sus hosts del .env, que apunta a produccion. En los tests se redirigen a un
+             host inexistente para que cualquier acceso falle en vez de tocar datos reales. -->
+        <env name="DB_HOST" value="127.0.0.1" force="true"/>
+        <env name="DB_PORT" value="1" force="true"/>
+        <env name="DB_USERNAME" value="testing" force="true"/>
+        <env name="DB_PASSWORD" value="testing" force="true"/>
+        <env name="DB_USERS_HOST" value="127.0.0.1" force="true"/>
+        <env name="DB_USERS_PORT" value="1" force="true"/>
+        <env name="DB_USERS_DATABASE" value="testing" force="true"/>
+        <env name="DB_USERS_USERNAME" value="testing" force="true"/>
+        <env name="DB_USERS_PASSWORD" value="testing" force="true"/>
+        <env name="DB_HOST_SAR" value="127.0.0.1" force="true"/>
+        <env name="DB_PORT_SAR" value="1" force="true"/>
+        <env name="DB_DATABASE_SAR" value="testing" force="true"/>
+        <env name="DB_USERNAME_SAR" value="testing" force="true"/>
+        <env name="DB_PASSWORD_SAR" value="testing" force="true"/>
+        <env name="DATABASE_URL" value="" force="true"/>
+        <env name="MAIL_MAILER" value="array"/>
+        <env name="QUEUE_CONNECTION" value="sync"/>
+        <env name="SESSION_DRIVER" value="array"/>
+        <env name="TELESCOPE_ENABLED" value="false"/>
+    </php>
+</phpunit>

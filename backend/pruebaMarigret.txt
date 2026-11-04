@@ -1,0 +1,38 @@
+NUMERO DA NOTA FISCAL           0001039101 }0D}0PACKING LISTPallet    Modelo               Part Numer                        Description                Qty    UN       Lote           867B HI¡ ' ENCOSTO TRASEIRO ESQUERDO 2ª FILA'L4034L )PERF.=       Front Cushion LH          40      PZA       115412           867B HI¡ ' ENCOSTO TRASEIRO ESQUERDO 2ªFILA'L4035L )PERF.=        Front Cushion LH          40      PZA       115412           867B HI¡ ' ENCOSTO TRASEIRO ESQUERDO 2ªFILA'L4142L                Front Cushion LH          40      PZA       115412           867B HI¡ ' ENCOSTO TRASEIRO ESQUERDO 2ª FILA'L4143L               Front Cushion LH          40      PZA       115412}0D}0A
+NUMERO DA NOTA FISCAL           0001039101 }0D}0PACKING LISTPallet    Modelo               Part Numer                        Description                Qty    UN       Lote           867B HI¡ ' ENCOSTO TRASEIRO DIREITO 2ªFILA'L4034R )PERF.=         Front Cushion LH          40      PZA       115412           867B HI¡ ' ENCOSTO TRASEIRO DIREITO 2ªFILA'L4035R )PERF.=         Front Cushion LH          40      PZA       115412           867B HI¡ ' ENCOSTO TRASEIRO DIREITO 2ªFILA ' L4142R               Front Cushion LH          40      PZA       115412           867B HI¡ ' ENCOSTO TRASEIRO DIREITO 2ª FILA ' L4143R              Front Cushion LH          40      PZA       115412}0D}0A
+
+
+
+
+
+
+
+NUMERO DA NOTA FISCAL           0001039101 }0D}0PACKING LISTPallet    Modelo               Part Numer                        Description                Qty    UN       Lote           867B HI¡ ' ENCOSTO TRASEIRO ESQUERDO 2ª FILA'L4034L )PERF.=       Front Cushion LH          40      PZA       115412           867B HI¡ ' ENCOSTO TRASEIRO ESQUERDO 2ªFILA'L4035L )PERF.=        Front Cushion LH          40      PZA       115412           867B HI¡ ' ENCOSTO TRASEIRO ESQUERDO 2ªFILA'L4142L                Front Cushion LH          40      PZA       115412           867B HI¡ ' ENCOSTO TRASEIRO ESQUERDO 2ª FILA'L4143L               Front Cushion LH          40      PZA       115412}0D}0A
+NUMERO DA NOTA FISCAL           0001039101 }0D}0PACKING LISTPallet    Modelo               Part Numer                        Description                Qty    UN       Lote           867B HI¡ ' ASSENTO TRASEIRO DIREITO 2ªFILA'L3056R )PERF.=         Front Cushion LH          40      PZA       115544           867B HI¡ ' ASSENTO TRASEIRO DIREITO 2ªFILA'L3057R )PERF.=         Front Cushion LH          40      PZA       115544           867B HI¡ ' ASSENTO TRASEIRO DIREITO 2ªFILA'L3058R )PERF.=         Front Cushion LH          40      PZA       115544           867B HI¡ ' ASSENTO TRASEIRO DIREITO 2ª FILA'L3165R                Front Cushion LH          40      PZA       115544}0D}0A
+NUMERO DA NOTA FISCAL           0001039101 }0D}0PACKING LISTPallet    Modelo               Part Numer                        Description                Qty    UN       Lote           867B HI¡ ' ASSENTO TRASEIRO ESQUERDO 2ªFILA'L3056L)PERF.=         Front Cushion LH          40      PZA       115544           867B HI¡ ' ASSENTO TRASEIRO ESQUERDO 2ªFILA'L3057L)PERF.=         Front Cushion LH          40      PZA       115544           867B HI¡ ' ASSENTO TRASEIRO ESQUERDO 2ªFILA'L3058L )PERF.=        Front Cushion LH          40      PZA       115544           867B HI¡ ' ASSENTO TRASEIRO ESQUERDO 2ªFILA'L3165L                Front Cushion LH          40      PZA       115544}0D}0A
+NUMERO DA NOTA FISCAL           0001039101 }0D}0PACKING LISTPallet    Modelo               Part Numer                        Description                Qty    UN       Lote           867B HI¡ ' ENCOSTO TRASEIRO DIREITO 2ªFILA'L4034R )PERF.=         Front Cushion LH          40      PZA       115544           867B HI¡ ' ENCOSTO TRASEIRO DIREITO 2ªFILA'L4035R )PERF.=         Front Cushion LH          40      PZA       115544           867B HI¡ ' ENCOSTO TRASEIRO DIREITO 2ªFILA ' L4142R               Front Cushion LH          40      PZA       115544           867B HI¡ ' ENCOSTO TRASEIRO DIREITO 2ª FILA ' L4143R              Front Cushion LH          40      PZA       115544}0D}0A
+NUMERO DA NOTA FISCAL           0001039101 }0D}0PACKING LISTPallet    Modelo               Part Numer                        Description                Qty    UN       Lote           867B HI¡ ' ENCOSTO TRASEIRO DIREITO 2ªFILA'L4034R )PERF.=         Front Cushion LH          40      PZA       115412           867B HI¡ ' ENCOSTO TRASEIRO DIREITO 2ªFILA'L4035R )PERF.=         Front Cushion LH          40      PZA       115412           867B HI¡ ' ENCOSTO TRASEIRO DIREITO 2ªFILA ' L4142R               Front Cushion LH          40      PZA       115412           867B HI¡ ' ENCOSTO TRASEIRO DIREITO 2ª FILA ' L4143R              Front Cushion LH          40      PZA       115412}0D}0A
+
+
+
+
+2442132.41247540.0025
++d211@241018@240|848298001|10|2442132|41247540|0025|3112005000
+
+2443132.41305011.0010
++d211@241022@240|848298001|10|2443132|41305011|0010|3112005000
+
+LOTE     ART   LOTE   BRUTO LIQ      PESO BRUTO
+3.01.190|6340A|224611|40,00|39,94|02|38,82
+
+3.01.189|2150A|223727|44,10|44,05|02|42,18
+3.01.190|6340A|224611|40,00|39,94|02|38,82
+
+3.01.252|8060D|225308|29,08|29,08|00|22,84|CUIT|30'70829380'2
+3.01.252|8070D|225341|26,02|26,02|00|20,30|CUIT|30'70829380'2
+3.01.252|7990C|224912|40,00|39,91|02|30,28|CUIT|30'70829380'2
+
+3.01.252ñ8060Dñ225308ñ29,08ñ29,08ñ00ñ22,84ñCUITÑ30'70829380'2
+3.01.189ñ2150Añ223727ñ44,10ñ44,05ñ02ñ42,18
+3.01.190ñ6340Añ224611ñ40,00ñ39,94ñ02ñ38,82
+3.01.251ñ7940Dñ224855ñ39,66ñ39,55ñ03ñ27,02ñCUITÑ30'70829380'2

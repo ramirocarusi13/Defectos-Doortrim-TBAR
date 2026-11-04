@@ -1,0 +1,679 @@
+{
+    "fuente": "Lista defectos Door Trim 737D - Rev. 22-10-26.xlsx",
+    "importado_at": "2026-10-30 13:40:42",
+    "grupos": [
+        {
+            "id": "APARIENCIA",
+            "nombre": "Apariencia",
+            "color": "FACC15"
+        },
+        {
+            "id": "FUNCIONAL",
+            "nombre": "Funcional",
+            "color": "EF4444"
+        },
+        {
+            "id": "ENSAMBLE",
+            "nombre": "Ensamble",
+            "color": "3B82F6"
+        },
+        {
+            "id": "ESPECIFICACION",
+            "nombre": "Especificación",
+            "color": "A855F7"
+        }
+    ],
+    "piezas": [
+        {
+            "id": "PANEL",
+            "tipo_pieza": "PANEL",
+            "nombre": "PANEL",
+            "defectos": [
+                {
+                    "id": "PANEL-1",
+                    "codigo": "P1",
+                    "nombre": "Pliegue NG",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "PANEL-2",
+                    "codigo": "P2",
+                    "nombre": "Daño",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "PANEL-3",
+                    "codigo": "P3",
+                    "nombre": "Floating",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "PANEL-4",
+                    "codigo": "P4",
+                    "nombre": "Ornamento poceado",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "PANEL-5",
+                    "codigo": "P5",
+                    "nombre": "Mancha de adhesivo",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "PANEL-6",
+                    "codigo": "P6",
+                    "nombre": "GAP NG entre partes",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "PANEL-7",
+                    "codigo": "P7",
+                    "nombre": "Ornamento dañado",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "PANEL-8",
+                    "codigo": "P8",
+                    "nombre": "Defecto de inyeccion",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "PANEL-9",
+                    "codigo": "P9",
+                    "nombre": "Film faltante",
+                    "rango": "B",
+                    "grupo": "ESPECIFICACION"
+                },
+                {
+                    "id": "PANEL-10",
+                    "codigo": "P10",
+                    "nombre": "W/S dañado",
+                    "rango": "B",
+                    "grupo": "FUNCIONAL"
+                },
+                {
+                    "id": "PANEL-11",
+                    "codigo": "P11",
+                    "nombre": "Manchas",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "PANEL-12",
+                    "codigo": "P12",
+                    "nombre": "Suciedad",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "PANEL-13",
+                    "codigo": "P13",
+                    "nombre": "KANBAN vs. Fisico NG",
+                    "rango": "B",
+                    "grupo": "ESPECIFICACION"
+                },
+                {
+                    "id": "PANEL-14",
+                    "codigo": "P14",
+                    "nombre": "Film mal pegado",
+                    "rango": "C",
+                    "grupo": "ENSAMBLE"
+                },
+                {
+                    "id": "PANEL-15",
+                    "codigo": "P15",
+                    "nombre": "Funcionamiento NG de la luz",
+                    "rango": "B",
+                    "grupo": "FUNCIONAL"
+                },
+                {
+                    "id": "PANEL-16",
+                    "codigo": "P16",
+                    "nombre": "W/S deformado",
+                    "rango": "B",
+                    "grupo": "FUNCIONAL"
+                },
+                {
+                    "id": "PANEL-17",
+                    "codigo": "P17",
+                    "nombre": "Protuberancia",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "PANEL-18",
+                    "codigo": "P18",
+                    "nombre": "Rebaba NG",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "PANEL-19",
+                    "codigo": "P19",
+                    "nombre": "Corte de colada NG",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "PANEL-20",
+                    "codigo": "P20",
+                    "nombre": "Costura desalineada",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "PANEL-21",
+                    "codigo": "P21",
+                    "nombre": "Costura dañada",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "PANEL-22",
+                    "codigo": "P22",
+                    "nombre": "Hilo largo",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "PANEL-23",
+                    "codigo": "P23",
+                    "nombre": "Color de costura NG",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "PANEL-24",
+                    "codigo": "P24",
+                    "nombre": "Costura floja",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "PANEL-25",
+                    "codigo": "P25",
+                    "nombre": "Ornamento mal posicionado",
+                    "rango": "C",
+                    "grupo": "ENSAMBLE"
+                },
+                {
+                    "id": "PANEL-26",
+                    "codigo": "P26",
+                    "nombre": "Desnivel NG entre partes",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "PANEL-27",
+                    "codigo": "P27",
+                    "nombre": "Brillo NG",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "PANEL-28",
+                    "codigo": "P28",
+                    "nombre": "Componente faltante",
+                    "rango": "B",
+                    "grupo": "ESPECIFICACION"
+                },
+                {
+                    "id": "PANEL-29",
+                    "codigo": "P29",
+                    "nombre": "Costura desalineada (IP)",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "PANEL-30",
+                    "codigo": "P30",
+                    "nombre": "Ornamento despegado",
+                    "rango": "C",
+                    "grupo": "ENSAMBLE"
+                },
+                {
+                    "id": "PANEL-31",
+                    "codigo": "P31",
+                    "nombre": "Etiqueta faltante",
+                    "rango": "C",
+                    "grupo": "ESPECIFICACION"
+                },
+                {
+                    "id": "PANEL-32",
+                    "codigo": "P32",
+                    "nombre": "Hilo suelto",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "PANEL-33",
+                    "codigo": "P33",
+                    "nombre": "Ornamento equivocado",
+                    "rango": "B",
+                    "grupo": "ESPECIFICACION"
+                },
+                {
+                    "id": "PANEL-34",
+                    "codigo": "P34",
+                    "nombre": "W/S equivocado",
+                    "rango": "B",
+                    "grupo": "ESPECIFICACION"
+                }
+            ]
+        },
+        {
+            "id": "ARM_REST_CON_COVER",
+            "tipo_pieza": "ARM_REST",
+            "nombre": "ARM REST CON COVER",
+            "defectos": [
+                {
+                    "id": "ARM_REST_CON_COVER-1",
+                    "codigo": "AC1",
+                    "nombre": "Pliegue NG",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "ARM_REST_CON_COVER-2",
+                    "codigo": "AC2",
+                    "nombre": "Daño",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "ARM_REST_CON_COVER-3",
+                    "codigo": "AC3",
+                    "nombre": "Floating",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "ARM_REST_CON_COVER-4",
+                    "codigo": "AC4",
+                    "nombre": "Ornamento poceado",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "ARM_REST_CON_COVER-5",
+                    "codigo": "AC5",
+                    "nombre": "Mancha de adhesivo",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "ARM_REST_CON_COVER-6",
+                    "codigo": "AC6",
+                    "nombre": "Ornamento dañado",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "ARM_REST_CON_COVER-7",
+                    "codigo": "AC7",
+                    "nombre": "Defecto de inyeccion",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "ARM_REST_CON_COVER-8",
+                    "codigo": "AC8",
+                    "nombre": "Pliegue fuera de contorno",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "ARM_REST_CON_COVER-9",
+                    "codigo": "AC9",
+                    "nombre": "Manchas",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "ARM_REST_CON_COVER-10",
+                    "codigo": "AC10",
+                    "nombre": "Suciedad",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "ARM_REST_CON_COVER-11",
+                    "codigo": "AC11",
+                    "nombre": "KANBAN vs. Fisico NG",
+                    "rango": "B",
+                    "grupo": "ESPECIFICACION"
+                },
+                {
+                    "id": "ARM_REST_CON_COVER-12",
+                    "codigo": "AC12",
+                    "nombre": "Protuberancia",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "ARM_REST_CON_COVER-13",
+                    "codigo": "AC13",
+                    "nombre": "Rebaba NG",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "ARM_REST_CON_COVER-14",
+                    "codigo": "AC14",
+                    "nombre": "Corte de colada NG",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "ARM_REST_CON_COVER-15",
+                    "codigo": "AC15",
+                    "nombre": "Costura desalineada",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "ARM_REST_CON_COVER-16",
+                    "codigo": "AC16",
+                    "nombre": "Costura dañada",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "ARM_REST_CON_COVER-17",
+                    "codigo": "AC17",
+                    "nombre": "Hilo largo",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "ARM_REST_CON_COVER-18",
+                    "codigo": "AC18",
+                    "nombre": "Color de costura NG",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "ARM_REST_CON_COVER-19",
+                    "codigo": "AC19",
+                    "nombre": "Costura floja",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "ARM_REST_CON_COVER-20",
+                    "codigo": "AC20",
+                    "nombre": "Ornamento mal posicionado",
+                    "rango": "C",
+                    "grupo": "ENSAMBLE"
+                },
+                {
+                    "id": "ARM_REST_CON_COVER-21",
+                    "codigo": "AC21",
+                    "nombre": "Brillo NG",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "ARM_REST_CON_COVER-22",
+                    "codigo": "AC22",
+                    "nombre": "Componente faltante",
+                    "rango": "B",
+                    "grupo": "ESPECIFICACION"
+                },
+                {
+                    "id": "ARM_REST_CON_COVER-23",
+                    "codigo": "AC23",
+                    "nombre": "Tornillo retainer flojo",
+                    "rango": "B",
+                    "grupo": "ENSAMBLE"
+                },
+                {
+                    "id": "ARM_REST_CON_COVER-24",
+                    "codigo": "AC24",
+                    "nombre": "Punto de soldadura faltante",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "ARM_REST_CON_COVER-25",
+                    "codigo": "AC25",
+                    "nombre": "Punto de soldadaura pasado",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "ARM_REST_CON_COVER-26",
+                    "codigo": "AC26",
+                    "nombre": "Punto de soldadura suelto",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "ARM_REST_CON_COVER-27",
+                    "codigo": "AC27",
+                    "nombre": "Costura fuera de canaleta",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "ARM_REST_CON_COVER-28",
+                    "codigo": "AC28",
+                    "nombre": "Etiqueta faltante",
+                    "rango": "B",
+                    "grupo": "ESPECIFICACION"
+                },
+                {
+                    "id": "ARM_REST_CON_COVER-29",
+                    "codigo": "AC29",
+                    "nombre": "Hilo suelto",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "ARM_REST_CON_COVER-30",
+                    "codigo": "AC30",
+                    "nombre": "Rechupe NG",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                }
+            ]
+        },
+        {
+            "id": "ARM_REST_SIN_COVER",
+            "tipo_pieza": "ARM_REST",
+            "nombre": "ARM REST SIN COVER",
+            "defectos": [
+                {
+                    "id": "ARM_REST_SIN_COVER-1",
+                    "codigo": "AS1",
+                    "nombre": "Daño",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "ARM_REST_SIN_COVER-2",
+                    "codigo": "AS2",
+                    "nombre": "Defecto de inyección",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "ARM_REST_SIN_COVER-3",
+                    "codigo": "AS3",
+                    "nombre": "Manchas",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "ARM_REST_SIN_COVER-4",
+                    "codigo": "AS4",
+                    "nombre": "Suciedad",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "ARM_REST_SIN_COVER-5",
+                    "codigo": "AS5",
+                    "nombre": "KANBAN vs. Fisico NG",
+                    "rango": "B",
+                    "grupo": "ESPECIFICACION"
+                },
+                {
+                    "id": "ARM_REST_SIN_COVER-6",
+                    "codigo": "AS6",
+                    "nombre": "Rebaba NG",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "ARM_REST_SIN_COVER-7",
+                    "codigo": "AS7",
+                    "nombre": "Corte de colada NG",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "ARM_REST_SIN_COVER-8",
+                    "codigo": "AS8",
+                    "nombre": "Brillo NG",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "ARM_REST_SIN_COVER-9",
+                    "codigo": "AS9",
+                    "nombre": "Componente faltante",
+                    "rango": "B",
+                    "grupo": "ESPECIFICACION"
+                },
+                {
+                    "id": "ARM_REST_SIN_COVER-10",
+                    "codigo": "AS10",
+                    "nombre": "Tornillo retainer flojo",
+                    "rango": "B",
+                    "grupo": "ENSAMBLE"
+                },
+                {
+                    "id": "ARM_REST_SIN_COVER-11",
+                    "codigo": "AS11",
+                    "nombre": "Etiqueta faltante",
+                    "rango": "B",
+                    "grupo": "ESPECIFICACION"
+                },
+                {
+                    "id": "ARM_REST_SIN_COVER-12",
+                    "codigo": "AS12",
+                    "nombre": "Rechupe NG",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "ARM_REST_SIN_COVER-13",
+                    "codigo": "AS13",
+                    "nombre": "Rayas",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                }
+            ]
+        },
+        {
+            "id": "GARNISH",
+            "tipo_pieza": "GARNISH",
+            "nombre": "GARNISH",
+            "defectos": [
+                {
+                    "id": "GARNISH-1",
+                    "codigo": "G1",
+                    "nombre": "Daño",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "GARNISH-2",
+                    "codigo": "G2",
+                    "nombre": "Defecto de inyección",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "GARNISH-3",
+                    "codigo": "G3",
+                    "nombre": "Manchas",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "GARNISH-4",
+                    "codigo": "G4",
+                    "nombre": "Suciedad",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "GARNISH-5",
+                    "codigo": "G5",
+                    "nombre": "KANBAN vs. Fisico NG",
+                    "rango": "B",
+                    "grupo": "ESPECIFICACION"
+                },
+                {
+                    "id": "GARNISH-6",
+                    "codigo": "G6",
+                    "nombre": "Rebaba NG",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "GARNISH-7",
+                    "codigo": "G7",
+                    "nombre": "Corte de colada NG",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "GARNISH-8",
+                    "codigo": "G8",
+                    "nombre": "Brillo NG",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "GARNISH-9",
+                    "codigo": "G9",
+                    "nombre": "Componente faltante",
+                    "rango": "B",
+                    "grupo": "ESPECIFICACION"
+                },
+                {
+                    "id": "GARNISH-10",
+                    "codigo": "G10",
+                    "nombre": "Etiqueta faltante",
+                    "rango": "B",
+                    "grupo": "ESPECIFICACION"
+                },
+                {
+                    "id": "GARNISH-11",
+                    "codigo": "G11",
+                    "nombre": "Rechupe NG",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                },
+                {
+                    "id": "GARNISH-12",
+                    "codigo": "G12",
+                    "nombre": "Rayas",
+                    "rango": "C",
+                    "grupo": "APARIENCIA"
+                }
+            ]
+        }
+    ]
+}

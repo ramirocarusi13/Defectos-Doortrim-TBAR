@@ -1,0 +1,2 @@
+git pull
+docker build . -t api:latest && docker stop api & docker rm api & docker run -d -v api_files:/var/www/html/storage --restart unless-stopped --name api -p 4545:80 api:latest

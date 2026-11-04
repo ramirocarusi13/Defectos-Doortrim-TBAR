@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Config de Enterprise Home Screen (Zebra) para las tablets de la linea de door
+  trims: MODO KIOSCO clavado en DOORTRIM DEFECTOS (igual que el kiosco de EOL
+  Defectos, pero con la app de door). Se instala con INSTALAR-KIOSCO-DOORTRIM-WIFI.bat. Variante que deja cambiar el
+  Wi-Fi desde la app (engranaje del login).
+  Para salir del kiosco: QUITAR-KIOSCO.bat (necesita depuracion USB activa).
+-->
+<config>
+    <kiosk>
+        <application label="DOORTRIM DEFECTOS" package="com.tbar.eoldoor" activity="com.tbar.eoldoor.MainActivity"/>
+    </kiosk>
+    <applications>
+        <application label="DOORTRIM DEFECTOS" package="com.tbar.eoldoor" activity="com.tbar.eoldoor.MainActivity"/>
+    </applications>
+    <tools>
+        <application label="Ajustes" package="com.android.settings"/>
+        <application label="StageNow" package="com.symbol.tool.stagenow"/>
+    </tools>
+    <passwords>
+        <admin></admin>
+    </passwords>
+    <preferences>
+        <title>DOORTRIM DEFECTOS</title>
+        <kiosk_mode_enabled>1</kiosk_mode_enabled>
+        <!-- CRITICO: SIEMPRE 0. Con 1 EHS corta el adb y no hay forma de volver
+             a configurar la tablet desde la PC (ver enterprisehomescreen.xml). -->
+        <usb_debugging_disabled>0</usb_debugging_disabled>
+        <apps_enabled>
+            <application package="com.android.settings"/>
+        </apps_enabled>
+        <!-- 0 = Ajustes COMPLETOS: necesario para que el engranaje del login de DOORTRIM
+             (mantener 3 s) abra el Wi-Fi y el operario pueda cambiar de red sin la PC.
+             OJO: con 0 desde Ajustes tambien se puede desinstalar la app. Para volver
+             a bloquear: INSTALAR-KIOSCO-DOORTRIM.bat (deja esto en 1). -->
+        <system_settings_restricted>0</system_settings_restricted>
+    </preferences>
+</config>

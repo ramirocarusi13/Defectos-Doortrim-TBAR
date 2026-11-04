@@ -1,0 +1,32 @@
+services:
+  api1:
+    image: api:latest
+    # build: .
+    ports:
+      - "4547:80"
+    volumes:
+      - api_uploads:/var/www/html/public/uploads
+    restart: always
+  api2:
+    image: api:latest
+    # build: .
+    ports:
+      - "4548:80"
+    volumes:
+      - api_uploads:/var/www/html/public/uploads
+    restart: always
+  # api3:
+  #   image: api:latest
+  #   # build: .
+  #   ports:
+  #     - "4549:80"
+  #   restart: always
+    
+  nginx:
+    build: ./nginx
+    ports:
+      - "4545:80"
+    restart: always
+
+volumes:
+  api_uploads:

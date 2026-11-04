@@ -1,0 +1,74 @@
+# Use PHP with Apache as the base image
+# Se fija bookworm (Debian 12): php:8.3-apache ya apunta a Debian 13 (trixie) y el
+# driver ODBC de Microsoft se instala desde el repo de Debian 12.
+FROM php:8.3-apache-bookworm
+
+# Install Additional System Dependencies
+RUN apt-get update && apt-get install -y \
+    libfreetype6-dev \
+    libjpeg62-turbo-dev \
+    libpng-dev \
+    libwebp-dev \
+    libzip-dev \
+    zip
+
+# Clear cache
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Enable Apache mod_rewrite for URL rewriting
+RUN a2enmod rewrite
+
+# Install PHP extensions
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
+    && docker-php-ext-install gd pdo_mysql zip
+
+ENV TZ=America/Argentina/Buenos_Aires
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+# Configure Apache DocumentRoot to point to Laravel's public directory
+# and update Apache configuration files
+ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
+RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+
+#INSTALO DRIVER SQL
+ENV ACCEPT_EULA=Y
+RUN apt-get update && apt-get install -y gnupg2
+RUN curl -sSL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /etc/apt/trusted.gpg.d/microsoft.gpg
+# Repo de Microsoft para Debian 12 (bookworm), alineado con la imagen base.
+RUN curl -sSL https://packages.microsoft.com/config/debian/12/prod.list -o /etc/apt/sources.list.d/mssql-release.list
+# RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - 
+# RUN curl https://packages.microsoft.com/config/ubuntu/20.04/prod.list > /etc/apt/sources.list.d/mssql-release.list 
+RUN apt-get update 
+RUN ACCEPT_EULA=Y apt-get -y --no-install-recommends install msodbcsql17 unixodbc-dev 
+RUN pecl channel-update pecl.php.net
+# sqlsrv/pdo_sqlsrv 5.13.x: soportan PHP 8.3+ (la 5.12 no se recomienda para 8.3).
+RUN pecl install sqlsrv-5.13.3
+RUN pecl install pdo_sqlsrv-5.13.3
+RUN docker-php-ext-enable sqlsrv pdo_sqlsrv
+
+# Copy the application code
+COPY . /var/www/html
+
+# Set the working directory
+WORKDIR /var/www/html
+
+# Install composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# Install project dependencies
+RUN composer install
+
+# Set permissions
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+
+# Genera las llaves OAuth solo si no vienen ya en storage/ (sin --force para no
+# invalidar las existentes; con el guard no falla el build si ya estan).
+RUN [ -f storage/oauth-private.key ] || php artisan passport:keys
+# Passport 13 valida los permisos de las claves: si son legibles por otros (p.ej.
+# 644, tipico cuando llegan por COPY desde el host) cada request autenticado da 500.
+# Se fijan explicitamente (el dueno pasa a www-data con el chown de abajo).
+RUN chmod 600 storage/oauth-private.key && chmod 660 storage/oauth-public.key
+RUN php artisan log-viewer:publish
+
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache /var/www/html/public /var/www/html/public/despiece

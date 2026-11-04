@@ -1,0 +1,34 @@
+{
+  "expo": {
+    "name": "DOORTRIM DEFECTOS",
+    "slug": "eol-door-app",
+    "version": "1.0.0",
+    "orientation": "landscape",
+    "userInterfaceStyle": "dark",
+    "icon": "./assets/icon-doortrim.png",
+    "splash": {
+      "backgroundColor": "#000000"
+    },
+    "platforms": [
+      "android",
+      "ios"
+    ],
+    "android": {
+      "package": "com.tbar.eoldoor",
+      "usesCleartextTraffic": true
+    },
+    "ios": {
+      "bundleIdentifier": "com.tbar.eoldoor"
+    },
+    "plugins": [
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "usesCleartextTraffic": true
+          }
+        }
+      ]
+    ]
+  }
+}

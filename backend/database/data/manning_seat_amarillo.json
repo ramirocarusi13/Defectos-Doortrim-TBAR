@@ -1,0 +1,536 @@
+{
+ "puestos": [
+  {
+   "sector": "FRONT",
+   "codigo": "FCA 1 Cushion",
+   "nombre": "Armado, Motor cushion"
+  },
+  {
+   "sector": "FRONT",
+   "codigo": "FPA 1 Back",
+   "nombre": "Armado, Motor back"
+  },
+  {
+   "sector": "FRONT",
+   "codigo": "FCA 4",
+   "nombre": "Casamiento bacha M6/M8"
+  },
+  {
+   "sector": "FRONT",
+   "codigo": "FCA 5",
+   "nombre": "Casamiento M4"
+  },
+  {
+   "sector": "FRONT",
+   "codigo": "FCA 6",
+   "nombre": "Funcional corredera"
+  },
+  {
+   "sector": "FRONT",
+   "codigo": "FR 1",
+   "nombre": "Picking back"
+  },
+  {
+   "sector": "FRONT",
+   "codigo": "FR 2",
+   "nombre": "Ensamble de Airbag"
+  },
+  {
+   "sector": "FRONT",
+   "codigo": "FR 3",
+   "nombre": "Engrampado Back"
+  },
+  {
+   "sector": "FRONT",
+   "codigo": "FR 4",
+   "nombre": "Enfundado Back"
+  },
+  {
+   "sector": "FRONT",
+   "codigo": "FR 5",
+   "nombre": "Camara Airbag"
+  },
+  {
+   "sector": "FRONT",
+   "codigo": "FR 6",
+   "nombre": "Alambre Back"
+  },
+  {
+   "sector": "FRONT",
+   "codigo": "FR 7",
+   "nombre": "Cableado de Bacha"
+  },
+  {
+   "sector": "FRONT",
+   "codigo": "FR 7.1",
+   "nombre": "Plastico de Bacha"
+  },
+  {
+   "sector": "FRONT",
+   "codigo": "FR 8",
+   "nombre": "1ª cerrado de Back"
+  },
+  {
+   "sector": "FRONT",
+   "codigo": "FR 9",
+   "nombre": "2º cerrado de Back"
+  },
+  {
+   "sector": "FRONT",
+   "codigo": "FR 10",
+   "nombre": "Engrampado de Cushion"
+  },
+  {
+   "sector": "FRONT",
+   "codigo": "FR 11",
+   "nombre": "Enfundado de Cushion"
+  },
+  {
+   "sector": "FRONT",
+   "codigo": "FR 12",
+   "nombre": "Cerrado de cushion"
+  },
+  {
+   "sector": "FRONT",
+   "codigo": "FR 13",
+   "nombre": "Pre-casado"
+  },
+  {
+   "sector": "FRONT",
+   "codigo": "FR 14",
+   "nombre": "Casamiento"
+  },
+  {
+   "sector": "FRONT",
+   "codigo": "FR 15",
+   "nombre": "Trabacinto"
+  },
+  {
+   "sector": "FRONT",
+   "codigo": "FR 16",
+   "nombre": "Cableado"
+  },
+  {
+   "sector": "FRONT",
+   "codigo": "FR 17",
+   "nombre": "Plastico"
+  },
+  {
+   "sector": "FRONT",
+   "codigo": "FR 18",
+   "nombre": "Escaneo"
+  },
+  {
+   "sector": "FRONT",
+   "codigo": "FR 19",
+   "nombre": "Acondicionado"
+  },
+  {
+   "sector": "FRONT",
+   "codigo": "FR 22",
+   "nombre": "Manipulador"
+  },
+  {
+   "sector": "FRONT",
+   "codigo": "FR 25",
+   "nombre": "Apoyacabeza"
+  },
+  {
+   "sector": "FRONT",
+   "codigo": "FR 26",
+   "nombre": "Piking cajita"
+  },
+  {
+   "sector": "FRONT",
+   "codigo": "FR 31",
+   "nombre": "Hotmelt"
+  },
+  {
+   "sector": "FRONT",
+   "codigo": "FR 31.1",
+   "nombre": "SVS Back / Cushion"
+  },
+  {
+   "sector": "TIP-UP",
+   "codigo": "T-UP 1",
+   "nombre": "Mensula"
+  },
+  {
+   "sector": "TIP-UP",
+   "codigo": "T-UP 2",
+   "nombre": "Alambre"
+  },
+  {
+   "sector": "TIP-UP",
+   "codigo": "T-UP 3",
+   "nombre": "Mensula, Apoyabrazo"
+  },
+  {
+   "sector": "TIP-UP",
+   "codigo": "T-UP 5",
+   "nombre": "Metalico"
+  },
+  {
+   "sector": "TIP-UP",
+   "codigo": "T-UP 6",
+   "nombre": "Cerrado reten Back"
+  },
+  {
+   "sector": "TIP-UP",
+   "codigo": "T-UP 7",
+   "nombre": "Cerrado, Cushion"
+  },
+  {
+   "sector": "TIP-UP",
+   "codigo": "T-UP 8",
+   "nombre": "Torqueo y cerrado Cushion"
+  },
+  {
+   "sector": "TIP-UP",
+   "codigo": "T-UP 9",
+   "nombre": "Casamiento"
+  },
+  {
+   "sector": "TIP-UP",
+   "codigo": "T-UP 10",
+   "nombre": "Apoyacabeza"
+  },
+  {
+   "sector": "TIP-UP",
+   "codigo": "T-UP 11",
+   "nombre": "Acondicion"
+  },
+  {
+   "sector": "TIP-UP",
+   "codigo": "FR 28",
+   "nombre": "Carga"
+  },
+  {
+   "sector": "TUMBLE",
+   "codigo": "TMB 1",
+   "nombre": "Apoyacabeza"
+  },
+  {
+   "sector": "TUMBLE",
+   "codigo": "TMB 2",
+   "nombre": "Engrampado"
+  },
+  {
+   "sector": "TUMBLE",
+   "codigo": "TMB 3",
+   "nombre": "Trabacinto"
+  },
+  {
+   "sector": "TUMBLE",
+   "codigo": "TMB 4",
+   "nombre": "Corredera"
+  },
+  {
+   "sector": "TUMBLE",
+   "codigo": "TMB 5",
+   "nombre": "Casamiento 1"
+  },
+  {
+   "sector": "TUMBLE",
+   "codigo": "TMB 6",
+   "nombre": "Casamiento 2"
+  },
+  {
+   "sector": "TUMBLE",
+   "codigo": "TMB 7",
+   "nombre": "Acondicionado"
+  },
+  {
+   "sector": "SPACE-UP",
+   "codigo": "S-up 1",
+   "nombre": "Enfundado de Back"
+  },
+  {
+   "sector": "SPACE-UP",
+   "codigo": "S-up 2",
+   "nombre": "Armado de Cushion"
+  },
+  {
+   "sector": "SPACE-UP",
+   "codigo": "S-up 3",
+   "nombre": "Trabacinto"
+  },
+  {
+   "sector": "SPACE-UP",
+   "codigo": "S-up 4",
+   "nombre": "Casamiento"
+  },
+  {
+   "sector": "SPACE-UP",
+   "codigo": "S-up 5",
+   "nombre": "Soporte/plastico"
+  },
+  {
+   "sector": "SPACE-UP",
+   "codigo": "S-up 6",
+   "nombre": "Engrampado de cushion"
+  }
+ ],
+ "operarios": [
+  {
+   "legajo": "2236",
+   "nombre": "Abalsamo Julián Agustín"
+  },
+  {
+   "legajo": "5174",
+   "nombre": "Abatangelo Uriel Nicolas"
+  },
+  {
+   "legajo": "2230",
+   "nombre": "Albornoz Marcelo Alejandro"
+  },
+  {
+   "legajo": "2112",
+   "nombre": "Alegre Alexis Ruben"
+  },
+  {
+   "legajo": "2200",
+   "nombre": "Alegre Tomas Agustín"
+  },
+  {
+   "legajo": "5107",
+   "nombre": "Atadia Ignacio Gonzalo"
+  },
+  {
+   "legajo": "2036",
+   "nombre": "Ayala Santiago Tomas"
+  },
+  {
+   "legajo": "1626",
+   "nombre": "Barrio Miguel Alejandro"
+  },
+  {
+   "legajo": "2272",
+   "nombre": "Barros Alfredo José Ismael"
+  },
+  {
+   "legajo": "5183",
+   "nombre": "Basilio Mariano Alejandro"
+  },
+  {
+   "legajo": "2130",
+   "nombre": "Belos Agustin Ezequiel"
+  },
+  {
+   "legajo": "2160",
+   "nombre": "Bugueño Nicolas Alejandro"
+  },
+  {
+   "legajo": "1990",
+   "nombre": "Corio Alexis Ezequiel"
+  },
+  {
+   "legajo": "1963",
+   "nombre": "De La Cruce Mario Angel Exequiel"
+  },
+  {
+   "legajo": "2223",
+   "nombre": "Diaz Thomas Augusto"
+  },
+  {
+   "legajo": "2027",
+   "nombre": "Farfaro Luciano Andres"
+  },
+  {
+   "legajo": "5113",
+   "nombre": "Franco Matias David"
+  },
+  {
+   "legajo": "2225",
+   "nombre": "Galarza Saulino Julián Eduardo"
+  },
+  {
+   "legajo": "2075",
+   "nombre": "Gimenez Franco Gabriel"
+  },
+  {
+   "legajo": "5110",
+   "nombre": "Godoy Horacio Andres"
+  },
+  {
+   "legajo": "5163",
+   "nombre": "Gomez Tobias Emanuel"
+  },
+  {
+   "legajo": "2231",
+   "nombre": "Gonzalez Federico Leonel"
+  },
+  {
+   "legajo": "1981",
+   "nombre": "González Franco Nicolás"
+  },
+  {
+   "legajo": "2175",
+   "nombre": "Gonzalez Leandro Iñaki"
+  },
+  {
+   "legajo": "2008",
+   "nombre": "Larrosa Marcos Ezequiel"
+  },
+  {
+   "legajo": "5158",
+   "nombre": "Levetti Mateo Francisco"
+  },
+  {
+   "legajo": "2170",
+   "nombre": "Lezcano Leandro"
+  },
+  {
+   "legajo": "2212",
+   "nombre": "Limachi Mamani Nelson"
+  },
+  {
+   "legajo": "2213",
+   "nombre": "Maldonado Briant Daniel"
+  },
+  {
+   "legajo": "2191",
+   "nombre": "Mantero Darío Fabian"
+  },
+  {
+   "legajo": "1903",
+   "nombre": "Marchelli Joaquin Miguel"
+  },
+  {
+   "legajo": "2168",
+   "nombre": "Marquez Sebastian"
+  },
+  {
+   "legajo": "2257",
+   "nombre": "Martinelli Dario"
+  },
+  {
+   "legajo": "2095",
+   "nombre": "Melo Hiber Horacio Nadir"
+  },
+  {
+   "legajo": "2125",
+   "nombre": "Mendez Juan Miguel"
+  },
+  {
+   "legajo": "2207",
+   "nombre": "Mendieta Francisco Javier"
+  },
+  {
+   "legajo": "2201",
+   "nombre": "Menéndez Néstor Laureano"
+  },
+  {
+   "legajo": "2100",
+   "nombre": "Micheloud Facundo Agustin"
+  },
+  {
+   "legajo": "2126",
+   "nombre": "Miglino Federico Elias"
+  },
+  {
+   "legajo": "2238",
+   "nombre": "Molina Sergio Sebastian"
+  },
+  {
+   "legajo": "5165",
+   "nombre": "Monzon Daniel Hugo"
+  },
+  {
+   "legajo": "1332",
+   "nombre": "Orcajo Ruben Ezequiel"
+  },
+  {
+   "legajo": "1914",
+   "nombre": "Ortega Walter Damián"
+  },
+  {
+   "legajo": "5061",
+   "nombre": "Pagge Gerardo"
+  },
+  {
+   "legajo": "1910",
+   "nombre": "Palacios Emanuel"
+  },
+  {
+   "legajo": "1985",
+   "nombre": "Perez Norberto Osvaldo"
+  },
+  {
+   "legajo": "5131",
+   "nombre": "Portillo Damián Luis Marcelo"
+  },
+  {
+   "legajo": "2146",
+   "nombre": "Ramírez Bautista"
+  },
+  {
+   "legajo": "2208",
+   "nombre": "Retamal Facundo Ezequiel"
+  },
+  {
+   "legajo": "1374",
+   "nombre": "Robles Gonzalo Gastón"
+  },
+  {
+   "legajo": "2037",
+   "nombre": "Rodriguez Ayrton Omar"
+  },
+  {
+   "legajo": "1615",
+   "nombre": "Rodríguez Matías Nicolás"
+  },
+  {
+   "legajo": "2215",
+   "nombre": "Rojas Rodrigo Ricardo"
+  },
+  {
+   "legajo": "2205",
+   "nombre": "Salazar Sergio Denis"
+  },
+  {
+   "legajo": "5077",
+   "nombre": "Salina Franco Ayar"
+  },
+  {
+   "legajo": "2116",
+   "nombre": "Salomoni Federico Nicolas"
+  },
+  {
+   "legajo": "5185",
+   "nombre": "Taborda Dino Franco Damian"
+  },
+  {
+   "legajo": "5190",
+   "nombre": "Taffarel Thomas Francisco"
+  },
+  {
+   "legajo": "2002",
+   "nombre": "Tesuri Lucas Ismael"
+  },
+  {
+   "legajo": "2101",
+   "nombre": "Toloza Martin Nicolas"
+  },
+  {
+   "legajo": "5177",
+   "nombre": "Toncovich Leandro"
+  },
+  {
+   "legajo": "5127",
+   "nombre": "Vence Manuel Exequiel"
+  },
+  {
+   "legajo": "1278",
+   "nombre": "Vianco Ricardo David"
+  },
+  {
+   "legajo": "1446",
+   "nombre": "Videla Emmanuel Laureano"
+  },
+  {
+   "legajo": "2268",
+   "nombre": "Zapata Gastón Ezequiel"
+  }
+ ]
+}

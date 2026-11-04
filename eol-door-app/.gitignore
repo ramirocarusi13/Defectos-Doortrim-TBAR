@@ -1,0 +1,21 @@
+node_modules/
+.expo/
+dist/
+dist-check/
+npm-debug.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/
+.DS_Store
+
+# Proyecto nativo generado por expo prebuild (se regenera; no se versiona)
+/android/
+/ios/
+
+# Logs y artefactos de build
+*.log
+*.apk

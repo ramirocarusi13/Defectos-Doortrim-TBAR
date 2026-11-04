@@ -1,0 +1,50 @@
+# ============================================================================
+#  Backend de DOORTRIM DEFECTOS (tablets de la linea de door trims).
+#  Se instala IGUAL que el stack de asientos (docker-compose.yml), en el mismo
+#  servidor y con el mismo .env de al lado, pero corre APARTE en el puerto 9001:
+#  no toca el backend de asientos.
+#
+#    docker load -i eol-door-api.tar
+#    docker compose -f docker-compose.door.yml up -d
+#
+#  Usa del .env:  DB_HOST, DB_USER, DB_PASS   -> EOL_TBAR (la misma de asientos)
+#                 DB_HOST_TBL, DB_USER_TBL, DB_PASS_TBL -> TB-L (app de camaras, .153)
+#  Door NO usa JITMS ni el interlock, y TB-L se lee SOLO LECTURA (el backend
+#  rechaza cualquier escritura antes de mandarla).
+#  La app de las tablets busca sola http://172.17.132.150:9001/api.
+# ============================================================================
+
+services:
+  door-api:
+    image: eol-door-api:latest
+    pull_policy: never
+    ports:
+      - "9001:80"
+    environment:
+      - APP_ENV=production
+      - APP_DEBUG=false
+      # EOL_TBAR: donde se guardan defectos, cambios y piezas de door.
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=
+      - DB_DATABASE=EOL_TBAR
+      - DB_USERNAME=${DB_USER}
+      - DB_PASSWORD=${DB_PASS}
+      # TB-L: datos de los QR de la app de camaras (hora del panel). Solo lectura.
+      - DB_HOST_TBL=${DB_HOST_TBL:-172.17.132.153,1433}
+      - DB_PORT_TBL=
+      - DB_DATABASE_TBL=TB-L
+      - DB_USERNAME_TBL=${DB_USER_TBL}
+      - DB_PASSWORD_TBL=${DB_PASS_TBL}
+      - DOOR_TBL_SQL_PANEL=${DOOR_TBL_SQL_PANEL:-}
+      # JITMS e interlock: door no los usa. Apagados y JITMS bloqueado por las dudas.
+      - DB_HOST_SAR=SIN_CONFIGURAR
+      - DB_USERNAME_SAR=
+      - DB_PASSWORD_SAR=
+      - EOL_INTERLOCK_ENABLED=false
+      - JITMS_SOLO_LECTURA=true
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      # Mismas fotos de modelos que el stack de asientos.
+      - ./backend/public/uploads/modelos:/var/www/html/public/uploads/modelos
+    restart: unless-stopped

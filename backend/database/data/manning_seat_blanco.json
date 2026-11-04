@@ -1,0 +1,257 @@
+{
+ "puestos": [],
+ "operarios": [
+  {
+   "legajo": "",
+   "nombre": "Mansilla Hernán Alfredo (GL)"
+  },
+  {
+   "legajo": "",
+   "nombre": "Barrera Guillermo Nicolás (GL)"
+  },
+  {
+   "legajo": "",
+   "nombre": "Alvarez Franco Alexis (TL)"
+  },
+  {
+   "legajo": "",
+   "nombre": "Lastra Héctor Manuel (TL)"
+  },
+  {
+   "legajo": "",
+   "nombre": "Small Jorge Matías (TL)"
+  },
+  {
+   "legajo": "",
+   "nombre": "Palavecino Jonathan Raul (TL)"
+  },
+  {
+   "legajo": "",
+   "nombre": "Gutierrez Luis Alberto (TL)"
+  },
+  {
+   "legajo": "",
+   "nombre": "Velazquez Oscar Sebastian (TL)"
+  },
+  {
+   "legajo": "",
+   "nombre": "Abatangelo Facundo Agustín (TL)"
+  },
+  {
+   "legajo": "",
+   "nombre": "Barroso Arnaldo Federico"
+  },
+  {
+   "legajo": "",
+   "nombre": "Bossi Leandro David"
+  },
+  {
+   "legajo": "",
+   "nombre": "Esquivel Carlos Ramón"
+  },
+  {
+   "legajo": "",
+   "nombre": "Gomez Santiago"
+  },
+  {
+   "legajo": "",
+   "nombre": "Salazar Hernan Ariel (TL)"
+  },
+  {
+   "legajo": "",
+   "nombre": "Campos Axel Nahuel"
+  },
+  {
+   "legajo": "",
+   "nombre": "Emeri Leonardo Emanuel"
+  },
+  {
+   "legajo": "",
+   "nombre": "Breuning Alan Leonel"
+  },
+  {
+   "legajo": "",
+   "nombre": "Medina Rodrigó Raúl"
+  },
+  {
+   "legajo": "",
+   "nombre": "Ellemberger Alex Gabriel"
+  },
+  {
+   "legajo": "",
+   "nombre": "Moyano Matías Braian"
+  },
+  {
+   "legajo": "",
+   "nombre": "Vega Nahuel Alexis"
+  },
+  {
+   "legajo": "",
+   "nombre": "Aragones Martinotti Felipe"
+  },
+  {
+   "legajo": "",
+   "nombre": "Ocampo Juan Pablo"
+  },
+  {
+   "legajo": "",
+   "nombre": "Bruni Julian Emanuel"
+  },
+  {
+   "legajo": "",
+   "nombre": "Tilleria Matias Sebastian"
+  },
+  {
+   "legajo": "",
+   "nombre": "Schmidt Nahuel Ezequiel"
+  },
+  {
+   "legajo": "",
+   "nombre": "Rocha Angel Ramon"
+  },
+  {
+   "legajo": "",
+   "nombre": "Correa Cristian Alejandro"
+  },
+  {
+   "legajo": "",
+   "nombre": "Fogel Alan Damian"
+  },
+  {
+   "legajo": "",
+   "nombre": "Del Monte Roque Martin"
+  },
+  {
+   "legajo": "",
+   "nombre": "Gonzalez Mauro Alejandro"
+  },
+  {
+   "legajo": "",
+   "nombre": "Vasallo Franco Luciano Nicolas"
+  },
+  {
+   "legajo": "",
+   "nombre": "Vera Nicolas Alejandro"
+  },
+  {
+   "legajo": "",
+   "nombre": "Lavorato Nicolas Ezequiel"
+  },
+  {
+   "legajo": "",
+   "nombre": "Perez Abdala Lautaro Gabriel"
+  },
+  {
+   "legajo": "",
+   "nombre": "Castro Laureano"
+  },
+  {
+   "legajo": "",
+   "nombre": "Mendoza Enzo Gastón"
+  },
+  {
+   "legajo": "",
+   "nombre": "Lopez Braian Ezequiel"
+  },
+  {
+   "legajo": "",
+   "nombre": "Ercolano Santiago Fabian"
+  },
+  {
+   "legajo": "",
+   "nombre": "Reynoso Thiago Tomas"
+  },
+  {
+   "legajo": "",
+   "nombre": "Montaña Lautaro Donato"
+  },
+  {
+   "legajo": "",
+   "nombre": "Flores Alejo Joel"
+  },
+  {
+   "legajo": "",
+   "nombre": "Noro Joaquin Oscar"
+  },
+  {
+   "legajo": "",
+   "nombre": "Mendez Luciano German"
+  },
+  {
+   "legajo": "",
+   "nombre": "Medina Franco Ayrton"
+  },
+  {
+   "legajo": "",
+   "nombre": "Meglio Franco Tomas"
+  },
+  {
+   "legajo": "",
+   "nombre": "Abralde Emanuel Nicolas"
+  },
+  {
+   "legajo": "",
+   "nombre": "Ramirez Maximiliano"
+  },
+  {
+   "legajo": "",
+   "nombre": "Carriego Gabriel Nicolás"
+  },
+  {
+   "legajo": "",
+   "nombre": "Konig Axel Uriel"
+  },
+  {
+   "legajo": "",
+   "nombre": "Soler Maximiliano Ezequiel"
+  },
+  {
+   "legajo": "",
+   "nombre": "Barbona Santillan Nicolas Javier"
+  },
+  {
+   "legajo": "",
+   "nombre": "Tarifa Ariel German"
+  },
+  {
+   "legajo": "",
+   "nombre": "Catalano Ciro Agustín"
+  },
+  {
+   "legajo": "",
+   "nombre": "Sánchez Rodríguez Lucas Hernán"
+  },
+  {
+   "legajo": "",
+   "nombre": "Pirola Ezequiel Emanuel"
+  },
+  {
+   "legajo": "",
+   "nombre": "Malchiodi Valentino Román"
+  },
+  {
+   "legajo": "",
+   "nombre": "Rodriguez Emiliano Adalberto"
+  },
+  {
+   "legajo": "",
+   "nombre": "Cespedes Tobias Gabriel"
+  },
+  {
+   "legajo": "",
+   "nombre": "Estrada Maico Joaquín"
+  },
+  {
+   "legajo": "",
+   "nombre": "Navarro Álvaro Tomas"
+  },
+  {
+   "legajo": "",
+   "nombre": "Oreggioni Agustin Fabian"
+  },
+  {
+   "legajo": "",
+   "nombre": "Maidana Nicolás Ezequiel"
+  }
+ ]
+}

@@ -138,15 +138,25 @@ Paso "7/9 Tablas de door en EOL_TBAR"
 Push-Location $backend
 $estado = & $php artisan migrate:status 2>&1
 Pop-Location
-$pendientes = $estado | Select-String -Pattern "Pending"
-if (-not $pendientes) {
-    Ok "no hay tablas pendientes"
+# EOL_TBAR del .150 se armo desde un dacpac: tiene las tablas pero no el registro de
+# migraciones viejas del monolito (users, racks, telescope...). Esas NO se corren:
+# solo las pendientes de las tablas eol_* (defectos / door), una por una.
+$pendientes = @($estado | Select-String -Pattern "^\s*(\S+)\s.*Pending" | ForEach-Object { $_.Matches[0].Groups[1].Value })
+$deDoor = @($pendientes | Where-Object { $_ -match "eol_" })
+$otras = @($pendientes | Where-Object { $_ -notmatch "eol_" })
+if ($otras.Count) { Write-Host "   (se ignoran $($otras.Count) migraciones viejas del monolito que no son de door)" }
+if (-not $deDoor.Count) {
+    Ok "las tablas de door ya estan al dia"
 } else {
-    Write-Host "   Pendientes (solo agregan tablas/columnas, no borran nada):"
-    $pendientes | ForEach-Object { Write-Host "     $($_.Line.Trim())" }
-    $r = Read-Host "   Crear esas tablas en EOL_TBAR ahora? (S/N)"
-    if ($r -match "^[sS]") { Php @("artisan", "migrate", "--force"); Ok "tablas creadas" }
-    else { Ojo "no se crearon: la app puede fallar hasta correr 'C:\php85\php.exe artisan migrate --force' en $backend" }
+    Write-Host "   Pendientes de door (solo agregan columnas/tablas, no borran nada):"
+    $deDoor | ForEach-Object { Write-Host "     $_" }
+    $r = Read-Host "   Aplicarlas en EOL_TBAR ahora? (S/N)"
+    if ($r -match "^[sS]") {
+        foreach ($mig in $deDoor) { Php @("artisan", "migrate", "--force", "--path=database/migrations/$mig.php") }
+        Ok "tablas de door al dia"
+    } else {
+        Ojo "no se aplicaron: algunas pantallas pueden fallar hasta aplicarlas"
+    }
 }
 
 Paso "8/9 Sitio IIS en el puerto 9001"

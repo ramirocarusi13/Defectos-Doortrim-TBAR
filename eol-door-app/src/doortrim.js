@@ -39,15 +39,27 @@ export function ladoDeModelo(m) {
   return /\bLH\b/i.test(nombre) ? "LH" : /\bRH\b/i.test(nombre) ? "RH" : "";
 }
 
-// Piezas de la planilla que corresponden a lo escaneado. Panel y garnish dan una
-// sola; el arm rest da dos (con / sin cover, eso no lo sabe JITMS). Si la familia
-// no se conoce, se ofrecen todas.
+// Piezas de la planilla que corresponden a lo escaneado. Siempre UNA por tipo, asi
+// se va directo a la foto: el arm rest tiene dos listas en la planilla (con / sin
+// cover) y se juntan en una sola "ARM REST" con los defectos de las dos (sin
+// repetir los de igual nombre). Si la familia no se conoce, se ofrecen todas.
 export function piezasPara(catalogo, familia) {
   const todas = catalogo?.piezas || [];
   const tipo = FAMILIA_A_TIPO[String(familia || "").toUpperCase()];
   if (!tipo) return todas;
   const filtradas = todas.filter((p) => p.tipo_pieza === tipo);
-  return filtradas.length ? filtradas : todas;
+  if (filtradas.length <= 1) return filtradas.length ? filtradas : todas;
+  const vistos = new Set();
+  const defectos = [];
+  for (const p of filtradas) {
+    for (const d of p.defectos || []) {
+      const clave = String(d?.nombre || d?.codigo || "").trim().toUpperCase();
+      if (vistos.has(clave)) continue;
+      vistos.add(clave);
+      defectos.push(d);
+    }
+  }
+  return [{ ...filtradas[0], id: tipo, nombre: tipoLabel(tipo), defectos }];
 }
 
 // Requisitos del reemplazo con los QR de la app de camaras (POST eol-door/qr):

@@ -99,10 +99,15 @@ export default function PantallaPanelNg({ puesto, impresora, onCambiarPuesto }) 
   return (
     <SafeAreaView style={styles.screen}>
       <StatusBar style="light" />
-      <TouchableOpacity activeOpacity={1} focusable={false} delayLongPress={3000} onLongPress={onCambiarPuesto} style={[styles.header, { paddingVertical: 10 }]}>
+      <View style={[styles.header, { paddingVertical: 8 }]}>
         <Text style={[styles.headerTitle, { fontSize: 22 }]}>PANEL NG · {puesto}</Text>
-        <Text style={{ color: "#fed7aa", textAlign: "center", fontSize: 13 }}>Impresora {impresora || "-"}</Text>
-      </TouchableOpacity>
+        <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginTop: 4 }}>
+          <Text style={{ color: "#fed7aa", fontSize: 13 }}>Impresora {impresora || "-"}</Text>
+          <TouchableOpacity focusable={false} onPress={onCambiarPuesto} hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }} style={{ borderColor: "#fed7aa", borderWidth: 1, borderRadius: 6, paddingHorizontal: 10, paddingVertical: 4 }}>
+            <Text style={{ color: "#fff", fontSize: 13, fontWeight: "bold" }}>CAMBIAR PUESTO</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
 
       <View style={[styles.body, { paddingTop: 10 }]}>
         {/* Lector del TC21: escribe aca, sin teclado en pantalla */}

@@ -115,7 +115,7 @@ if (-not $dbOk -and ($salida -join "`n") -match "Login failed for user 'eol_app'
         Ojo "No hay sqlcmd: abri $sqlLogin en SSMS (conectado al .150) y ejecutalo con F5."
     } else {
         $r = Read-Host "   El usuario eol_app no existe en el SQL del .150. Crearlo ahora con tu usuario de Windows? (S/N)"
-        if ($r -match "^[sS]") {
+        if ("$r".Trim() -match "^[sS]") {
             & sqlcmd -S "172.17.132.150" -E -C -b -i $sqlLogin
             if ($LASTEXITCODE -ne 0) { & sqlcmd -S "172.17.132.150" -E -b -i $sqlLogin }
             $salida = & $php "probar-db.tmp.php"
@@ -151,7 +151,7 @@ if (-not $deDoor.Count) {
     Write-Host "   Pendientes de door (solo agregan columnas/tablas, no borran nada):"
     $deDoor | ForEach-Object { Write-Host "     $_" }
     $r = Read-Host "   Aplicarlas en EOL_TBAR ahora? (S/N)"
-    if ($r -match "^[sS]") {
+    if ("$r".Trim() -match "^[sS]") {
         foreach ($mig in $deDoor) { Php @("artisan", "migrate", "--force", "--path=database/migrations/$mig.php") }
         Ok "tablas de door al dia"
     } else {

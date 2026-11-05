@@ -109,7 +109,11 @@ export default function PantallaPanelNg({ puesto, impresora, onCambiarPuesto }) 
       <View style={[styles.body, { paddingTop: 14 }]}>
         {/* Que escanear ahora */}
         <Text style={textoPaso}>{paso === PASO_NG ? "ESCANEÁ EL PANEL CON DEFECTO" : "ESCANEÁ EL PANEL NUEVO"}</Text>
-        {e ? <Text style={textoNg}>NG: {e.id}  ·  {resumen(e)}  ·  SEC {e.secuencia}</Text> : null}
+        {e ? (
+          <View style={{ backgroundColor: "#b91c1c", paddingVertical: 12, paddingHorizontal: 10, marginTop: 10 }}>
+            <Text style={textoNg}>PANEL NG: {e.id}  ·  {resumen(e)}  ·  SEC {e.secuencia}</Text>
+          </View>
+        ) : null}
 
         {/* Lector del TC21: escribe aca, sin teclado en pantalla */}
         <TextInput
@@ -160,4 +164,4 @@ export default function PantallaPanelNg({ puesto, impresora, onCambiarPuesto }) 
 }
 
 const textoPaso = { color: colors.text, fontSize: 24, fontWeight: "bold", textAlign: "center" };
-const textoNg = { color: "#fca5a5", fontSize: 18, fontWeight: "bold", textAlign: "center", marginTop: 8 };
+const textoNg = { color: "#fff", fontSize: 20, fontWeight: "bold", textAlign: "center" };

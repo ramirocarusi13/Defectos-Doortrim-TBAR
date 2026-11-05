@@ -15,8 +15,12 @@ export const API_BASES = [
   "http://172.16.0.149:9001/api",
 ];
 
-// Servidor escrito a mano en la tablet (mantener 3 s el titulo del login): una PC
-// en la misma red con INICIAR-DOORTRIM-LOCAL.bat. Se prueba antes que los de arriba.
+// Servidor de produccion: SIEMPRE se prueba primero. Lo demas (PC recordada, USB,
+// PCs de prueba) es solo de respaldo cuando el servidor no responde.
+const SERVIDOR = API_BASES[0];
+
+// PC encontrada en la red o escrita a mano (mantener 3 s el titulo del login):
+// va despues del servidor.
 let manual = null;
 
 export const getServidorManual = () => manual;
@@ -29,10 +33,12 @@ export const setServidorManual = (ip) => {
   } else {
     manual = `http://${v.includes(":") ? v : `${v}:9001`}/api`;
   }
-  if (manual) actual = manual;
   return manual;
 };
-export const getBases = () => (manual ? [manual, ...API_BASES.filter((b) => b !== manual)] : API_BASES);
+export const getBases = () =>
+  manual && manual !== SERVIDOR
+    ? [SERVIDOR, manual, ...API_BASES.filter((b) => b !== SERVIDOR && b !== manual)]
+    : API_BASES;
 
 let actual = API_BASES[0];
 

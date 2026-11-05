@@ -56,9 +56,8 @@ async function responde(base, ms) {
 // misma red de la tablet y la recuerda: asi alcanza con abrir
 // INICIAR-DOORTRIM-LOCAL.bat en la PC, sin escribir la IP en la tablet.
 async function elegirServidor() {
-  const actual = getApiBase();
-  const bases = getBases();
-  const orden = [actual, ...bases.filter((b) => b !== actual)];
+  // Siempre en el orden de getBases(): primero el servidor .150, despues el resto.
+  const orden = getBases();
   for (const base of orden) {
     if (await responde(base, 2500)) {
       setApiBase(base);

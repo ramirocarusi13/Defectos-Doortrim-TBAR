@@ -121,7 +121,10 @@ class DoorQrService
             return null;
         }
         $partes = array_values(array_filter(array_map('trim', preg_split('/[|;]/', $qr)), fn ($p) => $p !== ''));
-        $mano = $posicion = $sd = $secuencia = null;
+        // Armrest del puesto: "20261010171023|A3H|FR|LH" = fecha y hora de encolado
+        // (aaaammddhhmmss, 14 digitos) | SD | posicion | mano: la fecha no es la
+        // secuencia y da el curado de 4 hs.
+        $mano = $posicion = $sd = $secuencia = $fecha = null;
         foreach ($partes as $p) {
             if (!$mano && in_array($p, ['LH', 'RH'], true)) {
                 $mano = $p;
@@ -129,6 +132,8 @@ class DoorQrService
                 $posicion = $p;
             } elseif (!$sd && preg_match('/^[A-Z][A-Z0-9]{1,4}$/', $p)) {
                 $sd = $p;
+            } elseif (!$fecha && strlen($p) === 14 && ($f = self::fecha($p))) {
+                $fecha = $f;
             } elseif (!$secuencia && ctype_digit($p)) {
                 $secuencia = $p;
             }
@@ -142,7 +147,7 @@ class DoorQrService
             'mano'      => $mano,
             'posicion'  => $posicion,
             'secuencia' => $secuencia,
-            'fecha_encolado' => null,
+            'fecha_encolado' => $fecha?->format('Y-m-d H:i:s'),
         ];
     }
 

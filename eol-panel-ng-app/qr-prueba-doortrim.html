@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>QR prueba DOORTRIM</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+  :root { --bg: #ffffff; --fg: #111111; --muted: #555555; --line: #dddddd; --accent: #b91c1c; }
+  body { margin: 0; padding: 16px; background: var(--bg); color: var(--fg); font-family: system-ui, sans-serif; }
+  h1 { margin: 0 0 4px; font-size: 22px; }
+  p { margin: 0 0 16px; color: var(--muted); }
+  h2 { font-size: 16px; color: var(--accent); margin: 20px 0 8px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; }
+  .card { border: 1px solid var(--line); border-radius: 8px; padding: 12px; text-align: center; }
+  .card .qr { display: flex; justify-content: center; margin-bottom: 8px; }
+  .card b { display: block; font-size: 13px; }
+  .card code { display: block; font-size: 10px; word-break: break-all; color: var(--muted); margin-top: 4px; }
+</style>
+</head>
+<body>
+<h1>QR de prueba · DOORTRIM DEFECTOS</h1>
+<p>Formato de la app de cámaras (sin JITMS): panel <code>secuencia;mano;posición;SD</code>, armrest
+<code>fecha y hora de encolado + SD + posición + mano</code>, garnish = el SD.
+Calidad (9005) escanea la pieza y carga el defecto → Producción (9006) la escanea y toca RETRABAJAR o
+CAMBIAR (escanea la pieza nueva de la sección 2) → Calidad escanea la pieza nueva y valida.</p>
+
+<h2>1 · Pieza con defecto (la que escanea Calidad)</h2>
+<div class="grid" id="sale"></div>
+
+<h2>2 · CAMBIAR: pieza nueva que cumple (mismo SD, posición y mano; armrest con más de 4 hs)</h2>
+<div class="grid" id="nueva"></div>
+
+<h2>3 · CAMBIAR: piezas que la app tiene que rechazar</h2>
+<div class="grid" id="rechaza"></div>
+
+<script>
+  // Armrest encolado hace 1 hora: todavía curando.
+  const p = (n) => String(n).padStart(2, "0");
+  const h = new Date(Date.now() - 60 * 60 * 1000);
+  const recien = `${h.getFullYear()}${p(h.getMonth() + 1)}${p(h.getDate())}${p(h.getHours())}${p(h.getMinutes())}${p(h.getSeconds())}`;
+
+  const grupos = {
+    sale: [
+      ["Panel P3A · FR RH", "0001;RH;FR;P3A"],
+      ["Panel P1A · FR LH", "0002;LH;FR;P1A"],
+      ["Arm rest A4L · RR RH", "20261101080000A4LRRRH"],
+      ["Garnish GDC", "GDC"],
+    ],
+    nueva: [
+      ["Panel P3A · FR RH (nuevo)", "0011;RH;FR;P3A"],
+      ["Panel P1A · FR LH (nuevo)", "0012;LH;FR;P1A"],
+      ["Arm rest A4L · RR RH (curado)", "20261101090000A4LRRRH"],
+      ["Garnish GDC (mismo QR)", "GDC"],
+    ],
+    rechaza: [
+      ["Panel P3A de la otra mano", "0021;LH;FR;P3A"],
+      ["Panel de otro SD (P4A)", "0022;RH;FR;P4A"],
+      ["Arm rest encolado hace 1 h (curando)", recien + "A4LRRRH"],
+      ["Arm rest de la otra posición", "20261101100000A4LFRRH"],
+      ["Garnish de otro SD (GSB)", "GSB"],
+    ],
+  };
+  for (const [id, items] of Object.entries(grupos)) {
+    const cont = document.getElementById(id);
+    for (const [titulo, codigo] of items) {
+      const card = document.createElement("div");
+      card.className = "card";
+      const qr = document.createElement("div");
+      qr.className = "qr";
+      card.appendChild(qr);
+      card.insertAdjacentHTML("beforeend", `<b>${titulo}</b><code>${codigo}</code>`);
+      cont.appendChild(card);
+      new QRCode(qr, { text: codigo, width: 170, height: 170, correctLevel: QRCode.CorrectLevel.M });
+    }
+  }
+</script>
+</body>
+</html>

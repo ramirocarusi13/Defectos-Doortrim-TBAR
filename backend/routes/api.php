@@ -86,6 +86,12 @@ Route::group(['middleware' => ['cors', 'json.response']], function () {
     Route::get('eol-door/defectos', [\App\Http\Controllers\EolDoorController::class, 'defectos']);
     Route::post('eol-door/qr', [\App\Http\Controllers\EolDoorController::class, 'interpretarQr']);
     Route::get('eol-door/control-final', [\App\Http\Controllers\EolDoorController::class, 'controlFinal']);
+    // App PANEL NG (puestos Produccion 4 / 3): panel NG + reimpresion de etiqueta.
+    Route::get('panel-ng/puestos', [\App\Http\Controllers\PanelNgController::class, 'puestos']);
+    Route::get('panel-ng', [\App\Http\Controllers\PanelNgController::class, 'listar']);
+    Route::post('panel-ng', [\App\Http\Controllers\PanelNgController::class, 'marcarNg']);
+    Route::post('panel-ng/{id}/reetiquetar', [\App\Http\Controllers\PanelNgController::class, 'reetiquetar'])->whereNumber('id');
+    Route::post('panel-ng/{id}/reimprimir', [\App\Http\Controllers\PanelNgController::class, 'reimprimir'])->whereNumber('id');
     Route::post('eol-door/marcar-retrabajo', [\App\Http\Controllers\EolDoorController::class, 'marcarRetrabajo']);
     Route::get('eol-door/retrabajos', [\App\Http\Controllers\EolDoorController::class, 'retrabajos']);
     Route::put('eol-door/defecto/{id}/retrabajar', [\App\Http\Controllers\EolDoorController::class, 'retrabajar']);

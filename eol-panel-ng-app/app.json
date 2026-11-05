@@ -1,0 +1,34 @@
+{
+  "expo": {
+    "name": "PANEL NG",
+    "slug": "eol-panel-ng-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "icon": "./assets/icon-doortrim.png",
+    "splash": {
+      "backgroundColor": "#000000"
+    },
+    "platforms": [
+      "android",
+      "ios"
+    ],
+    "android": {
+      "package": "com.tbar.panelng",
+      "usesCleartextTraffic": true
+    },
+    "ios": {
+      "bundleIdentifier": "com.tbar.eoldoor"
+    },
+    "plugins": [
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "usesCleartextTraffic": true
+          }
+        }
+      ]
+    ]
+  }
+}

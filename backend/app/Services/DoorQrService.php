@@ -83,6 +83,12 @@ class DoorQrService
         // Sin numero de parte en /config: el modelo de foto de ese SD, posicion y mano
         // ("D3E RR RH", importar-fotos-doortrim.php), asi la tablet muestra SOLO las
         // fotos de ese lado. El garnish no trae mano: su modelo de foto es el SD.
+        // Lo que se MUESTRA es siempre lo que dice la etiqueta (SD real del QR, ej.
+        // D1H FR LH) o el numero de parte si /config lo tiene; la foto puede ser la de
+        // un SD parecido (D1G...), pero el nombre no cambia.
+        $datos['mostrar'] = $datos['codigo'] ?: ($datos['tipo'] === 'GARNISH'
+            ? $datos['sd_qr']
+            : implode(' ', array_filter([$datos['sd_qr'], $datos['posicion'], $datos['mano']])));
         if (!$datos['codigo']) {
             $datos['codigo'] = self::modeloDeFoto($modelos, $datos);
         }

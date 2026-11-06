@@ -232,7 +232,7 @@ export default function PantallaRetrabajoDoor({ user, config: configProp, onLogo
     });
   };
 
-  const vistasDe = (d) => (config ? vistasDoorTrim({ modelo: d.modelo, lado: d?.lado?.lado }, config) : []);
+  const vistasDe = (d) => (config ? vistasDoorTrim({ modelo: d.modelo, codigo: d.codigo, lado: d?.lado?.lado }, config) : []);
 
   // ---------- UI ----------
   if (exito) {

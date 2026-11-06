@@ -247,7 +247,9 @@ export default function PantallaDoorTrim({ user, config: configProp, onLogout, t
     await abrirSet(
       {
         qr: q.qr || value,
-        modelo: codigo || q.sd,
+        // Se muestra y se guarda lo que dice la etiqueta (D1H FR LH); codigo es
+        // el modelo que da la foto (puede ser un SD parecido: D1G FR LH).
+        modelo: q.mostrar || codigo || q.sd,
         codigo,
         sd: q.sd,
         lado: q.mano || null,

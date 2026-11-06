@@ -135,6 +135,11 @@ export function getConfiguredModelImagesForKanban(kanbanData, config) {
 export function vistasDoorTrim(d, cfg) {
   const sinSvg = (vs) => vs.filter((v) => !String(v.imagen || "").startsWith("data:image/svg"));
   let vistas = sinSvg(getConfiguredModelImagesForKanban(d, cfg));
+  // El modelo guardado es lo que dice la etiqueta (D1H FR LH); la foto puede ser
+  // la de un SD parecido, que viene en codigo (D1G FR LH).
+  if (vistas.length === 0 && d?.codigo) {
+    vistas = sinSvg(getConfiguredModelImagesForKanban({ ...d, modelo: d.codigo }, cfg));
+  }
   if (vistas.length === 0) {
     const codigo = String(d?.modelo || "").toUpperCase();
     const modelo = (cfg?.models || []).find((m) =>

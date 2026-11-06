@@ -53,7 +53,7 @@ class DoorQrService
      * (mismo modelo, mismas fotos y compatibles en el cambio de pieza). El SD tal
      * cual vino en el QR queda en 'sd_qr'.
      */
-    private const SD_EQUIVALENTE = ['D3H' => 'D3E'];
+    private const SD_EQUIVALENTE = ['D3H' => 'D3E', 'D1H' => 'D1G'];
 
     /**
      * Interpreta un QR de door trim. Devuelve null si no tiene ninguno de los
@@ -84,15 +84,7 @@ class DoorQrService
         // ("D3E RR RH", importar-fotos-doortrim.php), asi la tablet muestra SOLO las
         // fotos de ese lado. El garnish no trae mano: su modelo de foto es el SD.
         if (!$datos['codigo']) {
-            $codigoFoto = $datos['tipo'] === 'GARNISH'
-                ? $datos['sd']
-                : implode(' ', array_filter([$datos['sd'], $datos['posicion'], $datos['mano']]));
-            foreach ($modelos as $m) {
-                if (strtoupper((string) ($m['code'] ?? '')) === $codigoFoto && ($m['active'] ?? true) !== false) {
-                    $datos['codigo'] = $m['code'];
-                    break;
-                }
-            }
+            $datos['codigo'] = self::modeloDeFoto($modelos, $datos);
         }
         $datos['candidatos']  = array_map(fn ($m) => [
             'codigo'       => $m['code'] ?? null,
@@ -149,6 +141,43 @@ class DoorQrService
             'secuencia' => $secuencia,
             'fecha_encolado' => $fecha?->format('Y-m-d H:i:s'),
         ];
+    }
+
+    /**
+     * Modelo de foto para el QR ("<SD> <POS> <MANO>", importar-fotos-doortrim.php).
+     * Si ese SD no tiene fotos, para que la tablet nunca quede sin foto se usa la de
+     * un SD parecido de la MISMA posicion y mano: primero el mismo prefijo (D4H ->
+     * D4L/D4S, A3H -> A3G/A3S) y si no, cualquiera del mismo tipo (misma letra).
+     * El garnish no trae mano: su modelo de foto es el SD (si no, cualquier garnish).
+     */
+    private static function modeloDeFoto(array $modelos, array $d): ?string
+    {
+        $codigos = [];
+        foreach ($modelos as $m) {
+            if (($m['active'] ?? true) !== false && str_starts_with((string) ($m['id'] ?? ''), 'model-dt-')) {
+                $codigos[] = strtoupper((string) ($m['code'] ?? ''));
+            }
+        }
+        sort($codigos);
+        if ($d['tipo'] === 'GARNISH') {
+            $exacto = $d['sd'];
+            $resto = '';
+        } else {
+            $exacto = implode(' ', array_filter([$d['sd'], $d['posicion'], $d['mano']]));
+            $resto = ' ' . trim(($d['posicion'] ?? '') . ' ' . ($d['mano'] ?? ''));
+        }
+        if (in_array($exacto, $codigos, true)) {
+            return $exacto;
+        }
+        foreach ([substr($d['sd'], 0, 2), substr($d['sd'], 0, 1)] as $prefijo) {
+            foreach ($codigos as $c) {
+                $sdFoto = explode(' ', $c)[0];
+                if (str_starts_with($sdFoto, $prefijo) && ($resto === '' || str_ends_with($c, $resto))) {
+                    return $c;
+                }
+            }
+        }
+        return null;
     }
 
     /** PANEL / ARM_REST / GARNISH segun la familia del SD en /config, o su letra. */

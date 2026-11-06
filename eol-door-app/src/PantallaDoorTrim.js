@@ -29,6 +29,17 @@ import { FAMILIA_A_TIPO, modeloPorCodigo, ladoDeModelo, piezasPara, tipoLabel } 
 import { FotoConMarcas } from "./components/AsientoViewer";
 import DefectoInfoModal from "./components/DefectoInfoModal";
 
+// Nombre de lo que dice la etiqueta (D1H FR LH) cuando el servidor no manda
+// "mostrar": si el modelo de foto es de un SD parecido (D1G FR LH), se muestra el
+// SD del QR; un numero de parte de /config se muestra tal cual.
+function nombreEtiqueta(q, codigo) {
+  const sd = q.sd_qr || q.sd;
+  const etiqueta = q.familia === "GARNISH" ? sd : [sd, q.posicion, q.mano].filter(Boolean).join(" ");
+  if (!codigo) return etiqueta || q.sd;
+  const esModeloFoto = /^[A-Z][A-Z0-9]{1,4}( |$)/.test(codigo);
+  return esModeloFoto && codigo.split(" ")[0] !== sd ? etiqueta : codigo;
+}
+
 // Pantalla de CALIDAD de la linea de door trims: solo MARCA el defecto.
 //   1. escanear el door trim (el QR dice si es panel, arm rest o garnish)
 //   2. (solo arm rest) elegir con o sin cover
@@ -249,7 +260,7 @@ export default function PantallaDoorTrim({ user, config: configProp, onLogout, t
         qr: q.qr || value,
         // Se muestra y se guarda lo que dice la etiqueta (D1H FR LH); codigo es
         // el modelo que da la foto (puede ser un SD parecido: D1G FR LH).
-        modelo: q.mostrar || codigo || q.sd,
+        modelo: q.mostrar || nombreEtiqueta(q, codigo),
         codigo,
         sd: q.sd,
         lado: q.mano || null,

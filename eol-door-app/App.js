@@ -20,7 +20,7 @@ const TOP_ANDROID = Platform.OS === "android" ? RNStatusBar.currentHeight || 0 :
 import SplashTbar from "./src/components/SplashTbar";
 import { StatusBar } from "expo-status-bar";
 import { styles, colors } from "./src/styles";
-import { validarUsuario, getFactoryConfig, cargarServidorGuardado, guardarServidor } from "./src/api";
+import { validarUsuario, getFactoryConfig, cargarServidorGuardado, guardarServidor, cargarPuestoMain, guardarPuestoMain } from "./src/api";
 import { getApiBase } from "./src/config";
 import { esCalidad, esCapacitacion } from "./src/utils";
 import PantallaDoorTrim from "./src/PantallaDoorTrim";
@@ -43,6 +43,7 @@ export default function App() {
   // Servidor escrito a mano (mantener 3 s el titulo del login).
   const [showServidor, setShowServidor] = useState(false);
   const [servidorTxt, setServidorTxt] = useState("");
+  const [puestoTxt, setPuestoTxt] = useState("1");
   const [servidorMsg, setServidorMsg] = useState(null);
   const [probandoServidor, setProbandoServidor] = useState(false);
 
@@ -63,6 +64,7 @@ export default function App() {
   useEffect(() => {
     const t = setTimeout(() => setSplash(false), 2000);
     borrarSesion();
+    cargarPuestoMain().then((p) => setPuestoTxt(p));
     cargarServidorGuardado().then((v) => {
       setServidorTxt(v || "");
       getFactoryConfig().then((c) => {
@@ -121,6 +123,7 @@ export default function App() {
   const probarServidor = async () => {
     setProbandoServidor(true);
     setServidorMsg(null);
+    await guardarPuestoMain(puestoTxt);
     const ok = await guardarServidor(servidorTxt);
     setProbandoServidor(false);
     setServidorMsg(ok ? `Conectado a ${getApiBase()}` : "No responde ningún servidor. Revisá la IP y que la PC esté en la misma red con el .bat abierto.");
@@ -202,6 +205,17 @@ export default function App() {
                 onSubmitEditing={probarServidor}
               />
               <Text style={{ color: "#9ca3af", fontSize: 13, marginTop: 8 }}>Ahora: {getApiBase()}</Text>
+              <Text style={{ color: "#d1d5db", fontSize: 15, marginTop: 14, marginBottom: 6 }}>
+                Puesto de esta tablet (columna puesto de tblDoorMain). Vacío = todos.
+              </Text>
+              <TextInput
+                style={styles.input}
+                value={puestoTxt}
+                onChangeText={setPuestoTxt}
+                placeholder="ej. 1"
+                placeholderTextColor="#9ca3af"
+                keyboardType="number-pad"
+              />
               {servidorMsg ? <Text style={{ color: "#fbbf24", fontSize: 15, marginTop: 8 }}>{servidorMsg}</Text> : null}
               <View style={{ flexDirection: "row", marginTop: 16 }}>
                 <TouchableOpacity

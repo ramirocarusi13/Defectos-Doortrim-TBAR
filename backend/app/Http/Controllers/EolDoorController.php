@@ -692,14 +692,20 @@ class EolDoorController extends Controller
      * sola a la siguiente cuando entra una fila nueva. Solo lectura.
      * data: { id, qr, fecha, usuario } o null si la tabla esta vacia.
      */
-    public function controlFinal(): JsonResponse
+    public function controlFinal(Request $request): JsonResponse
     {
         $tabla = (string) config('door.control_final_tabla');
         if (!preg_match('/^[\[\]\w.\- ]+$/', $tabla)) {
             return response()->json(['data' => null, 'error' => true, 'message' => 'Tabla del puesto mal configurada'], 500);
         }
+        // ?puesto=1: la tablet solo toma los escaneos de su puesto (columna puesto de
+        // tblDoorMain). Sin puesto: el ultimo escaneo de cualquiera.
+        $puesto = $request->query('puesto');
+        $porPuesto = is_numeric($puesto);
         try {
-            $f = DB::connection('tbl')->selectOne("SELECT TOP 1 id, QR, fecha, usuario FROM {$tabla} WITH (NOLOCK) ORDER BY id DESC");
+            $f = $porPuesto
+                ? DB::connection('tbl')->selectOne("SELECT TOP 1 id, QR, fecha, usuario FROM {$tabla} WITH (NOLOCK) WHERE puesto = ? ORDER BY id DESC", [(int) $puesto])
+                : DB::connection('tbl')->selectOne("SELECT TOP 1 id, QR, fecha, usuario FROM {$tabla} WITH (NOLOCK) ORDER BY id DESC");
         } catch (\Throwable $e) {
             Log::warning('controlFinal: no se pudo leer', ['error' => $e->getMessage()]);
             return response()->json(['data' => null, 'error' => true, 'message' => 'No se pudo leer la tabla del puesto'], 503);

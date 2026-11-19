@@ -399,6 +399,29 @@ export function interpretarQrDoor(qr) {
 
 // QR que dejo el puesto de control final en TB-PLC (tblDoorControlFinal):
 // [{ tipo: PANEL|ARM_REST|GARNISH, qr, rh, lh }]. Solo lectura.
+// Puesto de la tablet (columna puesto de tblDoorMain): solo toma los escaneos de
+// ese puesto. Vacio = el ultimo escaneo de cualquier puesto.
+const KEY_PUESTO = "doortrim_puesto_main";
+let puestoMain = "1";
+export const getPuestoMain = () => puestoMain;
+export async function cargarPuestoMain() {
+  try {
+    const v = await AsyncStorage.getItem(KEY_PUESTO);
+    if (v !== null) puestoMain = v;
+  } catch (e) {
+    /* sin almacenamiento: queda el puesto 1 */
+  }
+  return puestoMain;
+}
+export async function guardarPuestoMain(v) {
+  puestoMain = String(v || "").trim();
+  try {
+    await AsyncStorage.setItem(KEY_PUESTO, puestoMain);
+  } catch (e) {
+    /* vale hasta cerrar la app */
+  }
+}
+
 export function getControlFinal() {
-  return get("eol-door/control-final");
+  return get(puestoMain ? `eol-door/control-final?puesto=${encodeURIComponent(puestoMain)}` : "eol-door/control-final");
 }

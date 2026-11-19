@@ -699,18 +699,20 @@ class EolDoorController extends Controller
             return response()->json(['data' => null, 'error' => true, 'message' => 'Tabla del puesto mal configurada'], 500);
         }
         // ?puesto=1: la tablet toma los escaneos de su puesto: los que dicen ese numero en
-        // la columna puesto de tblDoorMain O los de su mano en el QR (ultimo campo),
-        // door.puestos_mano (1 = LH, 2 = RH). Sin puesto: el ultimo escaneo de cualquiera.
+        // la columna puesto de tblDoorMain O los de sus lados en el QR ("POS|MANO"),
+        // door.puestos_lados (1 = FR LH y RR RH, 2 = FR RH y RR LH). Sin puesto: el
+        // ultimo escaneo de cualquiera.
         $puesto = $request->query('puesto');
-        $mano = is_numeric($puesto) ? (config('door.puestos_mano')[(int) $puesto] ?? null) : null;
+        $lados = is_numeric($puesto) ? (config('door.puestos_lados')[(int) $puesto] ?? []) : [];
         try {
             if (!is_numeric($puesto)) {
                 $f = DB::connection('tbl')->selectOne("SELECT TOP 1 id, QR, fecha, usuario FROM {$tabla} WITH (NOLOCK) ORDER BY id DESC");
-            } elseif ($mano) {
+            } elseif ($lados) {
+                $porLado = implode(' OR ', array_fill(0, count($lados), 'RTRIM(QR) LIKE ?'));
                 $f = DB::connection('tbl')->selectOne(
                     "SELECT TOP 1 id, QR, fecha, usuario FROM {$tabla} WITH (NOLOCK)
-                     WHERE puesto = ? OR RTRIM(QR) LIKE ? ORDER BY id DESC",
-                    [(int) $puesto, '%|' . $mano . '%']
+                     WHERE puesto = ? OR {$porLado} ORDER BY id DESC",
+                    array_merge([(int) $puesto], array_map(fn ($l) => '%|' . $l . '%', $lados))
                 );
             } else {
                 $f = DB::connection('tbl')->selectOne("SELECT TOP 1 id, QR, fecha, usuario FROM {$tabla} WITH (NOLOCK) WHERE puesto = ? ORDER BY id DESC", [(int) $puesto]);

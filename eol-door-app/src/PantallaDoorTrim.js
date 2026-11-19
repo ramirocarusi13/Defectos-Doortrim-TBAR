@@ -30,13 +30,13 @@ import { FAMILIA_A_TIPO, modeloPorCodigo, ladoDeModelo, piezasPara, tipoLabel } 
 import { FotoConMarcas } from "./components/AsientoViewer";
 import DefectoInfoModal from "./components/DefectoInfoModal";
 
-// Lado de cada puesto (igual que door.puestos_mano en el servidor): la tablet del
-// puesto 1 es la de LH y la del 2 la de RH. Un QR del otro lado no se abre.
-const MANO_DEL_PUESTO = { 1: "LH", 2: "RH" };
+// Lados de cada puesto (igual que door.puestos_lados en el servidor): el puesto 1
+// abre FR LH y RR RH, el 2 FR RH y RR LH. Un QR de otro lado no se abre.
+const LADOS_DEL_PUESTO = { 1: ["FR LH", "RR RH"], 2: ["FR RH", "RR LH"] };
 function esDeMiLado(qr) {
-  const mia = MANO_DEL_PUESTO[getPuestoMain()];
-  const m = String(qr || "").toUpperCase().match(/\|\s*(LH|RH)\b/);
-  return !mia || !m || m[1] === mia;
+  const mios = LADOS_DEL_PUESTO[getPuestoMain()];
+  const m = String(qr || "").toUpperCase().match(/\|\s*(FR|RR)\s*\|\s*(LH|RH)\b/);
+  return !mios || !m || mios.includes(`${m[1]} ${m[2]}`);
 }
 
 // Nombre de lo que dice la etiqueta (D1H FR LH) cuando el servidor no manda

@@ -16,10 +16,13 @@ return [
     // sola. Se lee por la conexion 'tbl' (mismo server .153, solo lectura).
     'control_final_tabla' => env('DOOR_CONTROL_FINAL_TABLA', '[TB-PLC].[dbo].[tblDoorMain]'),
 
-    // Puesto de cada tablet de Calidad segun la mano del QR, mientras la columna
-    // puesto de tblDoorMain venga vacia: la tablet del puesto 1 abre los LH y la del
-    // puesto 2 los RH.
-    'puestos_mano' => [1 => 'LH', 2 => 'RH'],
+    // Puesto de cada tablet de Calidad segun la posicion y mano del QR ("POS|MANO"),
+    // ademas de la columna puesto de tblDoorMain: el puesto 1 abre FR LH y RR RH, el
+    // puesto 2 FR RH y RR LH (panel, armrest y garnish).
+    'puestos_lados' => [
+        1 => ['FR|LH', 'RR|RH'],
+        2 => ['FR|RH', 'RR|LH'],
+    ],
 
     // Puesto de reetiquetado (panel NG): cada puesto imprime en su Zebra (ZPL por
     // TCP 9100). El numero del puesto es el de la impresora.

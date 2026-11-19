@@ -17,6 +17,7 @@ const KEY_PUESTO = "panelng_puesto";
 const PUESTOS_FIJOS = [
   { puesto: "PRODUCCION 4", impresora: "" },
   { puesto: "PRODUCCION 3", impresora: "" },
+  { puesto: "PRODUCCION 5", impresora: "" },
 ];
 
 export default function App() {

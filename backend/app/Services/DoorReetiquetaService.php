@@ -162,10 +162,11 @@ class DoorReetiquetaService
 
     // ------------------------------------------------------------------ impresion
 
-    /** Manda el ZPL a la Zebra por TCP 9100. */
+    /** Manda el ZPL a la Zebra por TCP: "ip" (puerto 9100) o "ip:puerto" (ej. 6101). */
     public static function imprimir(string $ip, string $zpl): void
     {
-        $sock = @fsockopen($ip, 9100, $errno, $errstr, 5);
+        [$host, $puerto] = array_pad(explode(':', $ip, 2), 2, null);
+        $sock = @fsockopen($host, (int) ($puerto ?: 9100), $errno, $errstr, 5);
         if (!$sock) {
             throw new \RuntimeException("No se pudo conectar con la impresora {$ip} ({$errstr})", 503);
         }

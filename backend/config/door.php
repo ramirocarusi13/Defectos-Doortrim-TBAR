@@ -32,6 +32,8 @@ return [
     'impresoras' => [
         'PRODUCCION 4' => env('DOOR_IMPRESORA_PRODUCCION_4', '172.17.129.68'),
         'PRODUCCION 3' => env('DOOR_IMPRESORA_PRODUCCION_3', '172.17.129.68'),
+        // Esta Zebra recibe por el puerto 6101 (el 9100 lo tiene cerrado).
+        'PRODUCCION 5' => env('DOOR_IMPRESORA_PRODUCCION_5', '172.17.129.135:6101'),
     ],
 
     // Ajuste de la etiqueta reimpresa a la etiqueta fisica (Zebra ZT231 203 dpi).

@@ -698,8 +698,8 @@ class EolDoorController extends Controller
         if (!preg_match('/^[\[\]\w.\- ]+$/', $tabla)) {
             return response()->json(['data' => null, 'error' => true, 'message' => 'Tabla del puesto mal configurada'], 500);
         }
-        // ?puesto=1: la tablet solo toma los escaneos de su puesto. Si la columna puesto
-        // de tblDoorMain viene vacia, el puesto sale de la mano del QR (ultimo campo):
+        // ?puesto=1: la tablet toma los escaneos de su puesto: los que dicen ese numero en
+        // la columna puesto de tblDoorMain O los de su mano en el QR (ultimo campo),
         // door.puestos_mano (1 = LH, 2 = RH). Sin puesto: el ultimo escaneo de cualquiera.
         $puesto = $request->query('puesto');
         $mano = is_numeric($puesto) ? (config('door.puestos_mano')[(int) $puesto] ?? null) : null;
@@ -709,7 +709,7 @@ class EolDoorController extends Controller
             } elseif ($mano) {
                 $f = DB::connection('tbl')->selectOne(
                     "SELECT TOP 1 id, QR, fecha, usuario FROM {$tabla} WITH (NOLOCK)
-                     WHERE puesto = ? OR (puesto IS NULL AND RTRIM(QR) LIKE ?) ORDER BY id DESC",
+                     WHERE puesto = ? OR RTRIM(QR) LIKE ? ORDER BY id DESC",
                     [(int) $puesto, '%|' . $mano . '%']
                 );
             } else {

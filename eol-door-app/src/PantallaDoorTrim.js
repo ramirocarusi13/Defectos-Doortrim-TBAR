@@ -16,6 +16,7 @@ import { StatusBar } from "expo-status-bar";import { styles, colors } from "./st
 import {
   interpretarQrDoor,
   getControlFinal,
+  getPuestoMain,
   getFactoryConfig,
   getFactoryConfigVersion,
   marcarRetrabajo,
@@ -28,6 +29,15 @@ import { vistasDoorTrim } from "./factoryConfig";
 import { FAMILIA_A_TIPO, modeloPorCodigo, ladoDeModelo, piezasPara, tipoLabel } from "./doortrim";
 import { FotoConMarcas } from "./components/AsientoViewer";
 import DefectoInfoModal from "./components/DefectoInfoModal";
+
+// Lado de cada puesto (igual que door.puestos_mano en el servidor): la tablet del
+// puesto 1 es la de LH y la del 2 la de RH. Un QR del otro lado no se abre.
+const MANO_DEL_PUESTO = { 1: "LH", 2: "RH" };
+function esDeMiLado(qr) {
+  const mia = MANO_DEL_PUESTO[getPuestoMain()];
+  const m = String(qr || "").toUpperCase().match(/\|\s*(LH|RH)\b/);
+  return !mia || !m || m[1] === mia;
+}
 
 // Nombre de lo que dice la etiqueta (D1H FR LH) cuando el servidor no manda
 // "mostrar": si el modelo de foto es de un SD parecido (D1G FR LH), se muestra el
@@ -230,6 +240,7 @@ export default function PantallaDoorTrim({ user, config: configProp, onLogout, t
 
   // ---------- 1. DOOR TRIM ----------
   const buscarSet = async (value) => {
+    if (!esDeMiLado(value)) return;
     setLoading(true);
     setError(null);
     let cfg = config;
@@ -304,6 +315,8 @@ export default function PantallaDoorTrim({ user, config: configProp, onLogout, t
     if (!value || loading) return;
     if (scanTimer.current) clearTimeout(scanTimer.current);
     setQr("");
+    // Cada tablet es de un lado: un QR del otro lado no se abre (es de la otra tablet).
+    if (!esDeMiLado(value)) return;
     if (step === STEP_SET) buscarSet(value);
   };
 

@@ -78,6 +78,12 @@ class DoorQrService
         $unico = count($candidatos) === 1 ? $candidatos[0] : null;
         // Garnish: no trae mano. Si todos los candidatos son el mismo numero de parte
         // salvo la mano, igual se informa el primero como referencia de foto.
+        // Un numero de parte de /config SIN fotos (ej. los A3L 74210-PH190) no sirve
+        // para dibujar: se trata como si no estuviera y se usa un modelo de foto.
+        $conFoto = self::modelosConFoto();
+        if ($unico && $conFoto && !isset($conFoto[$unico['id'] ?? ''])) {
+            $unico = null;
+        }
         $datos['codigo']      = $unico['code'] ?? null;
         $datos['descripcion'] = $unico['name'] ?? null;
         // Sin numero de parte en /config: el modelo de foto de ese SD, posicion y mano
@@ -183,6 +189,18 @@ class DoorQrService
                 }
             }
         }
+        // Ultimo recurso, para que nada quede sin foto: cualquier foto de la misma pieza
+        // (misma letra del SD: A = armrest, G = garnish, D = panel), primero de la misma
+        // mano, despues cualquiera.
+        $letra = substr($d['sd'], 0, 1);
+        $mano = ' ' . ($d['mano'] ?? '');
+        foreach ([true, false] as $mismaMano) {
+            foreach ($codigos as $c) {
+                if (str_starts_with($c, $letra) && (!$mismaMano || trim($mano) === '' || str_ends_with($c, $mano))) {
+                    return $c;
+                }
+            }
+        }
         return null;
     }
 
@@ -265,6 +283,23 @@ class DoorQrService
     }
 
     // ------------------------------------------------------------------ modelo
+
+    /** Ids de los modelos de /config que tienen al menos una foto activa. */
+    private static function modelosConFoto(): array
+    {
+        try {
+            $row = FactoryConfig::query()->where('key', 'active')->first();
+            $ids = [];
+            foreach ($row->data['modelImages'] ?? [] as $img) {
+                if (($img['active'] ?? true) !== false && !empty($img['modelId'])) {
+                    $ids[$img['modelId']] = true;
+                }
+            }
+            return $ids;
+        } catch (\Throwable $e) {
+            return [];
+        }
+    }
 
     private static function modelosConfig(): array
     {

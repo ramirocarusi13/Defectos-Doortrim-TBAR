@@ -16,6 +16,11 @@ return [
     // sola. Se lee por la conexion 'tbl' (mismo server .153, solo lectura).
     'control_final_tabla' => env('DOOR_CONTROL_FINAL_TABLA', '[TB-PLC].[dbo].[tblDoorMain]'),
 
+    // Puesto de cada tablet de Calidad segun la mano del QR, mientras la columna
+    // puesto de tblDoorMain venga vacia: la tablet del puesto 1 abre los LH y la del
+    // puesto 2 los RH.
+    'puestos_mano' => [1 => 'LH', 2 => 'RH'],
+
     // Puesto de reetiquetado (panel NG): cada puesto imprime en su Zebra (ZPL por
     // TCP 9100). El numero del puesto es el de la impresora.
     // OJO 05/11/2026: la impresora 4 perdio la IP (.90 por DHCP; quedo en la

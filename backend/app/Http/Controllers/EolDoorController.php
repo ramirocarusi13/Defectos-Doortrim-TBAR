@@ -698,14 +698,23 @@ class EolDoorController extends Controller
         if (!preg_match('/^[\[\]\w.\- ]+$/', $tabla)) {
             return response()->json(['data' => null, 'error' => true, 'message' => 'Tabla del puesto mal configurada'], 500);
         }
-        // ?puesto=1: la tablet solo toma los escaneos de su puesto (columna puesto de
-        // tblDoorMain). Sin puesto: el ultimo escaneo de cualquiera.
+        // ?puesto=1: la tablet solo toma los escaneos de su puesto. Si la columna puesto
+        // de tblDoorMain viene vacia, el puesto sale de la mano del QR (ultimo campo):
+        // door.puestos_mano (1 = LH, 2 = RH). Sin puesto: el ultimo escaneo de cualquiera.
         $puesto = $request->query('puesto');
-        $porPuesto = is_numeric($puesto);
+        $mano = is_numeric($puesto) ? (config('door.puestos_mano')[(int) $puesto] ?? null) : null;
         try {
-            $f = $porPuesto
-                ? DB::connection('tbl')->selectOne("SELECT TOP 1 id, QR, fecha, usuario FROM {$tabla} WITH (NOLOCK) WHERE puesto = ? ORDER BY id DESC", [(int) $puesto])
-                : DB::connection('tbl')->selectOne("SELECT TOP 1 id, QR, fecha, usuario FROM {$tabla} WITH (NOLOCK) ORDER BY id DESC");
+            if (!is_numeric($puesto)) {
+                $f = DB::connection('tbl')->selectOne("SELECT TOP 1 id, QR, fecha, usuario FROM {$tabla} WITH (NOLOCK) ORDER BY id DESC");
+            } elseif ($mano) {
+                $f = DB::connection('tbl')->selectOne(
+                    "SELECT TOP 1 id, QR, fecha, usuario FROM {$tabla} WITH (NOLOCK)
+                     WHERE puesto = ? OR (puesto IS NULL AND RTRIM(QR) LIKE ?) ORDER BY id DESC",
+                    [(int) $puesto, '%|' . $mano . '%']
+                );
+            } else {
+                $f = DB::connection('tbl')->selectOne("SELECT TOP 1 id, QR, fecha, usuario FROM {$tabla} WITH (NOLOCK) WHERE puesto = ? ORDER BY id DESC", [(int) $puesto]);
+            }
         } catch (\Throwable $e) {
             Log::warning('controlFinal: no se pudo leer', ['error' => $e->getMessage()]);
             return response()->json(['data' => null, 'error' => true, 'message' => 'No se pudo leer la tabla del puesto'], 503);

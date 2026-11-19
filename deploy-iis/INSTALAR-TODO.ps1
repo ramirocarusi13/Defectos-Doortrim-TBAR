@@ -37,7 +37,22 @@ New-Item -ItemType Directory -Force $local | Out-Null
 foreach ($f in "php85.zip", "vendor.zip", "fotos-737D-door.zip", "backend.env", "DOORTRIM-DEFECTOS.apk") {
     $src = Join-Path $Paquete $f
     $dst = Join-Path $local $f
-    if (Test-Path $src) { Copy-Item $src $dst -Force; Ok $f }
+    # Solo se copia lo que cambio (mismo tamano y no mas nuevo = ya esta): copiar los
+    # zip grandes por el disco del Escritorio remoto en cada corrida a veces se corta.
+    $igual = (Test-Path $src) -and (Test-Path $dst) -and
+        ((Get-Item $src).Length -eq (Get-Item $dst).Length) -and
+        ((Get-Item $src).LastWriteTimeUtc -le (Get-Item $dst).LastWriteTimeUtc)
+    if ($igual) { Ok "$f (ya estaba)" }
+    elseif (Test-Path $src) {
+        $copiado = $false
+        foreach ($intento in 1..3) {
+            try { Copy-Item $src $dst -Force -ErrorAction Stop; $copiado = $true; break }
+            catch { Ojo "copiando $f se corto (intento $intento): $($_.Exception.Message)"; Start-Sleep -Seconds 3 }
+        }
+        if ($copiado) { Ok $f }
+        elseif (Test-Path $dst) { Ojo "$f no se pudo copiar: se usa la copia que ya estaba" }
+        else { Falla "No se pudo copiar $f desde $Paquete. Volve a correr el script." }
+    }
     elseif (Test-Path $dst) { Ok "$f (ya estaba)" }
     elseif ($f -ne "DOORTRIM-DEFECTOS.apk") { Falla "No encuentro $f ni en $Paquete ni en $local. Compartiste el disco E en el Escritorio remoto?" }
 }

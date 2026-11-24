@@ -6,7 +6,8 @@
 
     powershell -ExecutionPolicy Bypass -File "\\tsclient\E\DATOS\Defectos-Doortrim-TBAR-paquete\INSTALAR-TODO.ps1"
 
-  Hace: copia el paquete, instala PHP 8.5 en C:\php85 (no toca C:\php), baja el
+  Hace: copia el paquete, instala PHP 8.5.13 en C:\php8513 (no toca C:\php ni
+  C:\php85; para pasar un sitio ya instalado usar ACTUALIZAR-PHP.ps1), baja el
   repo de GitHub a C:\DoortrimDefectos, pone vendor y .env, prueba EOL_TBAR y
   TB-PLC, genera claves, crea las tablas (pregunta antes), arma el sitio IIS en el
   9001, carga las fotos y verifica. Se puede volver a correr: salta lo que ya esta.
@@ -14,7 +15,7 @@
 param(
     [string]$Paquete = "\\tsclient\E\DATOS\Defectos-Doortrim-TBAR-paquete",
     [string]$Repo = "C:\DoortrimDefectos",
-    [string]$PhpDir = "C:\php85",
+    [string]$PhpDir = "C:\php8513",
     [string]$Git = "https://github.com/ramirocarusi13/Defectos-Doortrim-TBAR.git"
 )
 $ErrorActionPreference = "Stop"
@@ -34,7 +35,7 @@ function Php([string[]]$a) {
 
 Paso "1/9 Paquete"
 New-Item -ItemType Directory -Force $local | Out-Null
-foreach ($f in "php85.zip", "vendor.zip", "fotos-737D-door.zip", "backend.env", "DOORTRIM-DEFECTOS.apk") {
+foreach ($f in "php8513.zip", "vendor.zip", "fotos-737D-door.zip", "backend.env", "DOORTRIM-DEFECTOS.apk") {
     $src = Join-Path $Paquete $f
     $dst = Join-Path $local $f
     # Solo se copia lo que cambio (mismo tamano y no mas nuevo = ya esta): copiar los
@@ -57,9 +58,9 @@ foreach ($f in "php85.zip", "vendor.zip", "fotos-737D-door.zip", "backend.env", 
     elseif ($f -ne "DOORTRIM-DEFECTOS.apk") { Falla "No encuentro $f ni en $Paquete ni en $local. Compartiste el disco E en el Escritorio remoto?" }
 }
 
-Paso "2/9 PHP 8.5 en $PhpDir (el PHP de C:\php queda como esta)"
+Paso "2/9 PHP 8.5.13 en $PhpDir (el PHP de C:\php queda como esta)"
 if (-not (Test-Path $php)) {
-    Expand-Archive (Join-Path $local "php85.zip") -DestinationPath (Split-Path $PhpDir) -Force
+    Expand-Archive (Join-Path $local "php8513.zip") -DestinationPath (Split-Path $PhpDir) -Force
 }
 try { $v = & $php -r "echo PHP_VERSION;" 2>&1 } catch { $v = $_.Exception.Message }
 if ($LASTEXITCODE -ne 0 -or "$v" -notmatch "^8\.") {

@@ -9,7 +9,11 @@
   y recien ahi cambia el sitio de IIS. El cambio tarda segundos. Si la API no
   responde con la nueva, vuelve sola a la anterior. C:\php85 queda intacto.
 
-  Sin disco compartido (AnyDesk): copiar este script y php8513.zip a una misma
+  Lo mas simple (por AnyDesk o lo que sea): el script y php8513.zip vienen en el
+  repo, en deploy-iis. En PowerShell como administrador, una sola linea:
+    git -C C:\DoortrimDefectos pull --ff-only; powershell -ExecutionPolicy Bypass -File C:\DoortrimDefectos\deploy-iis\ACTUALIZAR-PHP.ps1
+
+  Sin git: copiar este script y php8513.zip a una misma
   carpeta del servidor (ej. C:\Defectos-Doortrim-TBAR-paquete) y correrlo desde ahi:
     powershell -ExecutionPolicy Bypass -File "C:\Defectos-Doortrim-TBAR-paquete\ACTUALIZAR-PHP.ps1"
 

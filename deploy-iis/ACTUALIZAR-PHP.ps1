@@ -9,11 +9,16 @@
   y recien ahi cambia el sitio de IIS. El cambio tarda segundos. Si la API no
   responde con la nueva, vuelve sola a la anterior. C:\php85 queda intacto.
 
+  Sin disco compartido (AnyDesk): copiar este script y php8513.zip a una misma
+  carpeta del servidor (ej. C:\Defectos-Doortrim-TBAR-paquete) y correrlo desde ahi:
+    powershell -ExecutionPolicy Bypass -File "C:\Defectos-Doortrim-TBAR-paquete\ACTUALIZAR-PHP.ps1"
+
   Para volver a la version anterior a mano:
     powershell -ExecutionPolicy Bypass -File "...\ACTUALIZAR-PHP.ps1" -Volver
 #>
 param(
-    [string]$Paquete = "\\tsclient\E\DATOS\Defectos-Doortrim-TBAR-paquete",
+    # Carpeta donde esta php8513.zip: por defecto, la misma del script.
+    [string]$Paquete = $PSScriptRoot,
     [string]$Repo = "C:\DoortrimDefectos",
     [string]$Nuevo = "C:\php8513",
     [string]$Viejo = "C:\php85",
@@ -91,7 +96,7 @@ elseif (Test-Path $src) {
     if (-not $copiado) { Falla "No se pudo copiar $zip desde $Paquete. Volve a correr el script." }
     Ok $zip
 }
-elseif (-not (Test-Path $dst)) { Falla "No encuentro $zip ni en $Paquete ni en $local. Compartiste el disco E en el Escritorio remoto?" }
+elseif (-not (Test-Path $dst)) { Falla "No encuentro $zip ni en $Paquete ni en $local. Copialo a la misma carpeta que este script." }
 
 Paso "2/5 Instalar en $Nuevo (al lado de $Viejo, que no se toca)"
 $php = Join-Path $Nuevo "php.exe"
